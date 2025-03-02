@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奶茶选择器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFB6C1; /* 淡粉色背景 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            color: #666;
+            font-size: 48px;
+            margin-bottom: 40px;
+        }
+
+        button {
+            background-color: #8A2BE2; /* 紫色按钮 */
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 20px 40px;
+            font-size: 24px;
+            width: 80%;
+            max-width: 400px;
+            margin: 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #6A0DAD;
+        }
+
+        #inner-campus {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #take-away {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #campus-result,
+        #takeaway-result {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>奶茶选择器</h1>
+    <h2>选择你今日份的奶茶吧！</h2>
+    <button id="campus-btn">校内喝</button>
+    <button id="takeaway-btn">点外卖喝</button>
+
+    <div id="inner-campus">
+        <h2>校内奶茶选择</h2>
+        <div id="campus-result"></div>
+        <button id="campus-choice-btn">随机选择</button>
+    </div>
+
+    <div id="take-away">
+        <h2>外卖奶茶选择</h2>
+        <div id="takeaway-result"></div>
+        <button id="takeaway-choice-btn">随机选择</button>
+    </div>
+
+
+    <script>
+        const campusBrands = ["蜜雪冰城", "瑞幸咖啡", "库迪咖啡", "星巴克", "沪上阿姨", "益禾堂", "佐拌杯"];
+        const takeawayBrands = ["喜茶", "霸王茶姬", "茶百道", "茉莉奶白", "乐乐茶", "鲜果时间", "茉酸奶", "CoCo都可", "一点点"];
+
+        document.getElementById('campus-btn').addEventListener('click', function () {
+            document.getElementById('inner-campus').style.display = 'flex';
+            document.getElementById('take-away').style.display = 'none';
+            const selectCampusBrand = function () {
+                const randomIndex = Math.floor(Math.random() * campusBrands.length);
+                document.getElementById('campus-result').textContent = campusBrands[randomIndex];
+            };
+            selectCampusBrand();
+            document.getElementById('campus-choice-btn').addEventListener('click', selectCampusBrand);
+        });
+
+        document.getElementById('takeaway-btn').addEventListener('click', function () {
+            document.getElementById('take-away').style.display = 'flex';
+            document.getElementById('inner-campus').style.display = 'none';
+            const selectTakeawayBrand = function () {
+                const randomIndex = Math.floor(Math.random() * takeawayBrands.length);
+                document.getElementById('takeaway-result').textContent = takeawayBrands[randomIndex];
+            };
+            selectTakeawayBrand();
+            document.getElementById('takeaway-choice-btn').addEventListener('click', selectTakeawayBrand);
+        });
+    </script>
+</body>
+
+</html>
