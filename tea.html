@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奶茶选择器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #wheel {
+            width: 350px;
+            height: 350px;
+            background-color: #fff;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            display: none;
+        }
+
+        #wheel div {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            clip: rect(0, 350px, 175px, 0);
+            transform-origin: 50% 100%;
+        }
+
+        #wheel div span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 18px;
+        }
+
+        #spin {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>选择你今日份的奶茶吧！</h1>
+    <button id="onCampus">校内喝</button>
+    <button id="takeAway">点外卖</button>
+
+    <div id="wheel">
+        <!-- 校内喝的奶茶品牌 -->
+        <div style="transform: rotate(0deg); background-color: #ffc107;"><span>蜜雪冰城</span></div>
+        <div style="transform: rotate(45deg); background-color: #00bcd4;"><span>瑞幸咖啡</span></div>
+        <div style="transform: rotate(90deg); background-color: #9c27b0;"><span>库迪咖啡</span></div>
+        <div style="transform: rotate(135deg); background-color: #e91e63;"><span>星巴克</span></div>
+        <div style="transform: rotate(180deg); background-color: #673ab7;"><span>沪上阿姨</span></div>
+        <div style="transform: rotate(225deg); background-color: #3f51b5;"><span>益禾堂</span></div>
+        <div style="transform: rotate(270deg); background-color: #03a9f4;"><span>佐拌杯</span></div>
+        <!-- 点外卖的新增奶茶品牌 -->
+        <div style="transform: rotate(315deg); background-color: #ff5722;"><span>喜茶</span></div>
+        <div style="transform: rotate(360 / 18 * 9 + 0deg); background-color: #4caf50;"><span>manner咖啡</span></div>
+        <div style="transform: rotate(360 / 18 * 10 + 0deg); background-color: #ff9800;"><span>奈雪的茶</span></div>
+        <div style="transform: rotate(360 / 18 * 11 + 0deg); background-color: #009688;"><span>霸王茶姬</span></div>
+        <div style="transform: rotate(360 /
