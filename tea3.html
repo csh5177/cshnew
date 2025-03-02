@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奶茶选择器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffe4e1; /* 淡粉色背景 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #9400d3; /* 紫色按钮 */
+            color: white;
+            border: none;
+            padding: 25px 50px;
+            font-size: 24px;
+            border-radius: 15px;
+            cursor: pointer;
+            margin: 20px;
+            width: 40%; /* 按钮占页面宽度40% */
+        }
+
+        button:hover {
+            background-color: #6a0dad;
+        }
+
+     .result {
+            font-size: 30px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>奶茶选择器</h1>
+    <h2>选择你今日份的奶茶吧！</h2>
+    <button id="onCampusButton">校内喝</button>
+    <button id="takeawayButton">点外卖喝</button>
+
+    <div id="campusResultPage" style="display: none;">
+        <h1>校内奶茶选择</h1>
+        <div id="campusResult" class="result"></div>
+        <button id="campusSelectButton">随机选择</button>
+    </div>
+
+    <div id="takeawayResultPage" style="display: none;">
+        <h1>外卖奶茶选择</h1>
+        <div id="takeawayResult" class="result"></div>
+        <button id="takeawaySelectButton">随机选择</button>
+    </div>
+
+    <script>
+        const campusBrands = ["蜜雪冰城", "瑞幸咖啡", "库迪咖啡", "星巴克", "沪上阿姨", "益禾堂", "佐拌杯"];
+        const takeawayBrands = ["喜茶", "霸王茶姬", "茶百道", "茉莉奶白", "乐乐茶", "鲜果时间", "茉酸奶", "CoCo都可", "一点点"];
+
+        document.getElementById('onCampusButton').addEventListener('click', function () {
+            document.getElementById('campusResultPage').style.display = 'block';
+            document.getElementById('takeawayResultPage').style.display = 'none';
+            const selectCampusBrand = function () {
+                const randomIndex = Math.floor(Math.random() * campusBrands.length);
+                document.getElementById('campusResult').textContent = campusBrands[randomIndex];
+            };
+            selectCampusBrand();
+            document.getElementById('campusSelectButton').addEventListener('click', selectCampusBrand);
+        });
+
+        document.getElementById('takeawayButton').addEventListener('click', function () {
+            document.getElementById('takeawayResultPage').style.display = 'block';
+            document.getElementById('campusResultPage').style.display = 'none';
+            const selectTakeawayBrand = function () {
+                const randomIndex = Math.floor(Math.random() * takeawayBrands.length);
+                document.getElementById('takeawayResult').textContent = takeawayBrands[randomIndex];
+            };
+            selectTakeawayBrand();
+            document.getElementById('takeawaySelectButton').addEventListener('click', selectTakeawayBrand);
+        });
+    </script>
+</body>
+
+</html>
