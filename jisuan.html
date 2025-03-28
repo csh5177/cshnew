@@ -12,39 +12,71 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f4f4f4;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
         table {
             border-collapse: collapse;
-            width: 300px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
         }
 
         td {
-            border: 1px solid #ccc;
-            padding: 15px;
+            border: none;
+            padding: 12px;
         }
 
         input[type="text"] {
             width: 100%;
             box-sizing: border-box;
-            padding: 15px;
-            font-size: 24px;
+            padding: 25px 20px;
+            font-size: 36px;
             text-align: right;
+            border: none;
+            background-color: #22252d;
+            color: white;
+            outline: none;
         }
 
         input[type="button"] {
             width: 100%;
-            padding: 15px;
-            font-size: 20px;
-            background-color: #e0e0e0;
+            padding: 20px;
+            font-size: 24px;
+            background-color: #292d36;
+            color: white;
             border: none;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         input[type="button"]:hover {
-            background-color: #d0d0d0;
+            background-color: #3a3f4b;
+        }
+
+        input[value="/"],
+        input[value="*"],
+        input[value="-"],
+        input[value="+"],
+        input[value="="] {
+            background-color: #f69906;
+        }
+
+        input[value="/"]:hover,
+        input[value="*"]:hover,
+        input[value="-"]:hover,
+        input[value="+"],
+        input[value="="]:hover {
+            background-color: #ffb338;
+        }
+
+        input[value="C"] {
+            background-color: #d43f3a;
+        }
+
+        input[value="C"]:hover {
+            background-color: #e45550;
         }
     </style>
 </head>
