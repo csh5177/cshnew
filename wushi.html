@@ -6,6 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MIDI与视频播放</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+       .video-container {
+            width: 80%;
+            max-width: 640px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+        }
+
+       .audio-container {
+            width: 80%;
+            max-width: 640px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        audio {
+            width: 100%;
+        }
+
         button {
             padding: 15px 32px;
             text-align: center;
@@ -13,22 +50,32 @@
             display: inline-block;
             font-size: 16px;
             border: none;
-            background-color: #4CAF50;
+            background-color: #007BFF;
             color: white;
             cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 
 <body>
-    <!-- 视频标签 -->
-    <video id="videoPlayer" src="https://raw.githubusercontent.com/csh5177/cshnew/main/c.mp4" autoplay loop muted>
-        您的浏览器不支持视频播放。
-    </video>
-    <!-- MIDI音频标签 -->
-    <audio id="midiPlayer" src="https://raw.githubusercontent.com/csh5177/cshnew/main/d.mid">
-        您的浏览器不支持MIDI播放。
-    </audio>
+    <!-- 视频容器 -->
+    <div class="video-container">
+        <video id="videoPlayer" src="https://raw.githubusercontent.com/csh5177/cshnew/main/c.mp4" autoplay loop muted>
+            您的浏览器不支持视频播放。
+        </video>
+    </div>
+    <!-- MIDI音频容器 -->
+    <div class="audio-container">
+        <audio id="midiPlayer" src="https://raw.githubusercontent.com/csh5177/cshnew/main/d.mid">
+            您的浏览器不支持MIDI播放。
+        </audio>
+    </div>
     <button id="playPauseButton">播放</button>
 
     <script>
