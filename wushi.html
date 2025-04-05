@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <title>MIDI 与视频播放器</title>
+    <style>
+        /* 为可交互元素添加悬停效果 */
+        button:hover {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded shadow-md w-9/12 md:w-2/3 lg:w-1/2">
+        <h1 class="text-2xl font-bold text-center mb-4">MIDI 音乐与视频播放器</h1>
+        <video id="videoPlayer" class="w-full mb-4" controls loop>
+            <source src="C.mp4" type="video/mp4">
+            你的浏览器不支持视频播放。
+        </video>
+        <audio id="midiPlayer" src="D.mid"></audio>
+        <div class="flex justify-center space-x-4">
+            <button id="playButton" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                <i class="fa-solid fa-play"></i> 播放音乐
+            </button>
+            <button id="pauseButton" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
+                <i class="fa-solid fa-pause"></i> 暂停音乐
+            </button>
+        </div>
+    </div>
+    <script>
+        const videoPlayer = document.getElementById('videoPlayer');
+        const midiPlayer = document.getElementById('midiPlayer');
+        const playButton = document.getElementById('playButton');
+        const pauseButton = document.getElementById('pauseButton');
+
+        // 设置视频时长为 4 秒并循环播放
+        videoPlayer.addEventListener('timeupdate', () => {
+            if (videoPlayer.currentTime >= 4) {
+                videoPlayer.currentTime = 0;
+            }
+        });
+
+        playButton.addEventListener('click', () => {
+            midiPlayer.play();
+        });
+
+        pauseButton.addEventListener('click', () => {
+            midiPlayer.pause();
+        });
+    </script>
+</body>
+
+</html>
+    
