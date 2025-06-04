@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>女性获奖者发言</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #FFD700 0%, #FFB75E 50%, #ED8F03 100%);
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* 导航栏样式 */
+        nav {
+            background: linear-gradient(to right, #4B0082, #8A2BE2);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        nav h1 {
+            font-size: 1.8rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #FFD700;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 英雄区域样式 */
+       .hero {
+            text-align: center;
+            padding: 4rem 0 2rem;
+        }
+
+       .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #4B0082;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+        }
+
+       .trophy-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+       .trophy-item {
+            margin: 0.5rem 1rem;
+            text-align: center;
+        }
+
+       .trophy-item img {
+            width: 100px;
+            height: auto;
+            margin-bottom: 0.5rem;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+       .trophy-item img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+       .microphone-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+       .microphone-container img {
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+       .microphone-container img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 介绍段落样式 */
+       .intro {
+            padding: 3rem 2rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+       .intro p {
+            max-width: 1000px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        /* 视频区域样式 */
+       .video-section {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+       .video-section h2 {
+            margin-bottom: 1.5rem;
+            color: #4B0082;
+            font-size: 1.8rem;
+        }
+
+        video {
+            max-width: 80%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 演讲稿数据库样式 */
+       .speech-db {
+            padding: 3rem 2rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+       .speech-db h2 {
+            margin-bottom: 1.5rem;
+            color: #4B0082;
+            font-size: 1.8rem;
+        }
+
+        #name-select {
+            padding: 0.8rem 1.2rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            max-width: 100%;
+            background-color: white;
+        }
+
+        #confirm-btn {
+            padding: 0.8rem 1.5rem;
+            margin: 0.8rem;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            border: none;
+            background-color: #4B0082;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        #confirm-btn:hover {
+            background-color: #8A2BE2;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        #speech-display button {
+            padding: 0.8rem 1.5rem;
+            margin: 0.8rem;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            border: none;
+            background-color: #4B0082;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        #speech-display button:hover {
+            background-color: #8A2BE2;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        #speech-text {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: left;
+            margin-top: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* 数据可视化部分样式 */
+       .visualization {
+            padding: 3rem 2rem;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+       .visualization h2 {
+            margin-bottom: 2rem;
+            color: #4B0082;
+            font-size: 1.8rem;
+        }
+
+       .visualization-section {
+            margin-bottom: 3rem;
+        }
+
+       .visualization-section h3 {
+            margin-bottom: 1.5rem;
+            color: #4B0082;
+            font-size: 1.5rem;
+        }
+
+       .image-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+       .image-item {
+            margin: 1rem;
+            text-align: center;
+        }
+
+       .image-item img {
+            width: 220px;
+            height: auto;
+            margin-bottom: 0.8rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+       .image-item img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+       .image-item p {
+            font-weight: bold;
+            color: #4B0082;
+        }
+
+        /* 图片放大模态框样式 */
+       .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+       .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 800px;
+            border-radius: 10px;
+        }
+
+       .close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+       .close:hover,
+       .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background: linear-gradient(to right, #4B0082, #8A2BE2);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            font-size: 1.1rem;
+        }
+
+        /* 音频控制样式 */
+       .audio-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+       .audio-control:hover {
+            background-color: white;
+            transform: scale(1.1);
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+
+<body>
+    <!-- 顶部导航栏 -->
+    <nav>
+        <h1>女性获奖者发言</h1>
+        <ul>
+            <li><a href="#home">首页</a></li>
+            <li><a href="#speech-db">演讲稿库</a></li>
+            <li><a href="#visualization">数据可视化</a></li>
+            <li><a href="#videos">视频展示</a></li>
+        </ul>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section id="home" class="hero">
+        <h1>女性获奖者发言</h1>
+        <div class="trophy-container">
+            <div class="trophy-item">
+                <img src="jiangbei1.jpg" alt="奖杯">
+            </div>
+            <div class="trophy-item">
+                <img src="jiangbei2.jpg" alt="奖杯">
+            </div>
+            <div class="trophy-item">
+                <img src="jiangbei3.jpg" alt="奖杯">
+            </div>
+            <div class="trophy-item">
+                <img src="jiangbei4.jpg" alt="奖杯">
+            </div>
+            <div class="trophy-item">
+                <img src="jiangbei5.jpg" alt="奖杯">
+            </div>
+            <div class="trophy-item">
+                <img src="jiangbei6.jpg" alt="奖杯">
+            </div>
+            <div class="trophy-item">
+                <img src="jiangbei7.jpg" alt="奖杯">
+            </div>
+            <div class="trophy-item">
+                <img src="jiangbei8.jpg" alt="奖杯">
+            </div>
+        </div>
+        <div class="microphone-container">
+            <img src="huatong.jpg" alt="话筒">
+        </div>
+    </section>
+
+    <!-- 介绍段落 -->
+    <section class="intro">
+        <p>这个网站集合了国内外颁奖典礼的女性获奖者的发言，呈现了发言稿集锦、发言视频、发言文本可视化、社交媒体传播效果可视化、AI融合作品等部分，希望可以展现聚光灯下的女性形象。</p>
+    </section>
+
+    <!-- 视频区域1 -->
+    <section id="videos" class="video-section">
+        <h2>精选视频</h2>
+        <video id="video1" src="video1.mp4" autoplay muted controls></video>
+    </section>
+
+    <!-- 演讲稿数据库 -->
+    <section id="speech-db" class="speech-db">
+        <h2>演讲稿数据库</h2>
+        <select id="name-select">
+            <option value="">选择姓名</option>
+            <option value="Mikey Madison">Mikey Madison</option>
+            <option value="Zoe Saldaña">Zoe Saldaña</option>
+            <option value="Emma Stone">Emma Stone</option>
+            <option value="Da'Vine Joy Randolph">Da'Vine Joy Randolph</option>
+            <option value="Angela Bassett">Angela Bassett</option>
+            <option value="Michelle Yeoh">Michelle Yeoh</option>
+            <option value="Jamie Lee Curtis">Jamie Lee Curtis</option>
+            <option value="Jessica Chastain">Jessica Chastain</option>
+            <option value="Ariana DeBose">Ariana DeBose</option>
+            <option value="Frances McDormand">Frances McDormand</option>
+            <option value="Yuh-Jung Youn">Yuh-Jung Youn</option>
+            <option value="Renée Zellweger">Renée Zellweger</option>
+            <option value="Laura Dern">Laura Dern</option>
+            <option value="Olivia Colman">Olivia Colman</option>
+            <option value="Regina King">Regina King</option>
+            <option value="Allison Janney">Allison Janney</option>
+            <option value="Viola Davis">Viola Davis</option>
+            <option value="Brie Larson">Brie Larson</option>
+            <option value="Alicia Vikander">Alicia Vikander</option>
+            <option value="Gena Rowlands">Gena Rowlands</option>
+            <option value="Julianne Moore">Julianne Moore</option>
+            <option value="Patricia Arquette">Patricia Arquette</option>
+            <option value="Cate Blanchett">Cate Blanchett</option>
+            <option value="Lupita Nyong'o">Lupita Nyong'o</option>
+            <option value="Jennifer Lawrence">Jennifer Lawrence</option>
+            <option value="Anne Hathaway">Anne Hathaway</option>
+            <option value="Meryl Streep">Meryl Streep</option>
+            <option value="Octavia Spencer">Octavia Spencer</option>
+            <option value="Oprah Winfrey">Oprah Winfrey</option>
+            <option value="Natalie Portman">Natalie Portman</option>
+            <option value="Melissa Leo">Melissa Leo</option>
+            <option value="Sandra Bullock">Sandra Bullock</option>
+            <option value="Mo'Nique">Mo'Nique</option>
+            <option value="Kate Winslet">Kate Winslet</option>
+            <option value="Penélope Cruz">Penélope Cruz</option>
+            <option value="Marion Cotillard">Marion Cotillard</option>
+            <option value="Tilda Swinton">Tilda Swinton</option>
+            <option value="Helen Mirren">Helen Mirren</option>
+            <option value="Jennifer Hudson">Jennifer Hudson</option>
+            <option value="Reese Witherspoon">Reese Witherspoon</option>
+            <option value="Rachel Weisz">Rachel Weisz</option>
+            <option value="Hilary Swank">Hilary Swank</option>
+            <option value="Charlize Theron">Charlize Theron</option>
+            <option value="Nicole Kidman">Nicole Kidman</option>
+            <option value="Catherine Zeta-Jones">Catherine Zeta-Jones</option>
+            <option value="Halle Berry">Halle Berry</option>
+            <option value="Jennifer Connelly">Jennifer Connelly</option>
+            <option value="Julia Roberts">Julia Roberts</option>
+            <option value="Marcia Gay Harden">Marcia Gay Harden</option>
+            <option value="热依扎">热依扎</option>
+            <option value="张小斐">张小斐</option>
+            <option value="黛米・摩尔（Demi Moore）">黛米・摩尔（Demi Moore）</option>
+            <option value="张伟丽">张伟丽</option>
+            <option value="屠呦呦">屠呦呦</option>
+            <option value="蔡依林">蔡依林</option>
+            <option value="安藤樱">安藤樱</option>
+            <option value="贾玲">贾玲</option>
+            <option value="Justine Triet">Justine Triet</option>
+            <option value="董明珠">董明珠</option>
+        </select>
+        <button id="confirm-btn">确认</button>
+        <div id="speech-display">
+            <button id="chinese-btn" style="display: none;">中文版本</button>
+            <button id="english-btn" style="display: none;">英文版本</button>
+            <button id="video-btn" style="display: none;">打开视频</button>
+            <div id="speech-text" style="display: none;"></div>
+        </div>
+    </section>
+
+    <!-- 数据可视化部分 -->
+    <section id="visualization" class="visualization">
+        <h2>数据可视化</h2>
+        <div class="visualization-section">
+            <h3>发言稿文本分析</h3>
+            <div class="image-container">
+                <div class="image-item">
+                    <img src="1.jpg" alt="中文词云图" class="visualization-img" data-modal="modal1">
+                    <p>中文词云图</p>
+                </div>
+                <div class="image-item">
+                    <img src="2.jpg" alt="英文词云图" class="visualization-img" data-modal="modal2">
+                    <p>英文词云图</p>
+                </div>
+                <div class="image-item">
+                    <img src="3.jpg" alt="发言高频词" class="visualization-img" data-modal="modal3">
+                    <p>发言高频词</p>
+                </div>
+                <div class="image-item">
+                    <img src="4.jpg" alt="主题一致性" class="visualization-img" data-modal="modal4">
+                    <p>主题一致性</p>
+                </div>
+                <div class="image-item">
+                    <img src="5.jpg" alt="主题困惑度" class="visualization-img" data-modal="modal5">
+                    <p>主题困惑度</p>
+                </div>
+                <div class="image-item">
+                    <img src="6.jpg" alt="主题分类" class="visualization-img" data-modal="modal6">
+                    <p>主题分类</p>
+                </div>
+                <div class="image-item">
+                    <img src="7.jpg" alt="主题人工编码" class="visualization-img" data-modal="modal7">
+                    <p>主题人工编码</p>
+                </div>
+                <div class="image-item">
+                    <img src="8.jpg" alt="主题气泡图" class="visualization-img" data-modal="modal8">
+                    <p>主题气泡图</p>
+                </div>
+                <div class="image-item">
+                    <img src="9.jpg" alt="主题聚类图" class="visualization-img" data-modal="modal9">
+                    <p>主题聚类图</p>
+                </div>
+                <div class="image-item">
+                    <img src="10.jpg" alt="主题聚类图升级版" class="visualization-img" data-modal="modal10">
+                    <p>主题聚类图升级版</p>
+                </div>
+                <div class="image-item">
+                    <img src="11.jpg" alt="发言语义网络图" class="visualization-img" data-modal="modal11">
+                    <p>发言语义网络图</p>
+                </div>
+            </div>
+        </div>
+        <div class="visualization-section">
+            <h3>弹幕评论文本分析</h3>
+            <div class="image-container">
+                <div class="image-item">
+                    <img src="12.jpg" alt="评论词云图" class="visualization-img" data-modal="modal12">
+                    <p>评论词云图</p>
+                </div>
+                <div class="image-item">
+                    <img src="13.jpg" alt="评论高频词" class="visualization-img" data-modal="modal13">
+                    <p>评论高频词</p>
+                </div>
+                <div class="image-item">
+                    <img src="14.jpg" alt="情感分布比例图" class="visualization-img" data-modal="modal14">
+                    <p>情感分布比例图</p>
+                </div>
+                <div class="image-item">
+                    <img src="15.jpg" alt="情感类别分布图" class="visualization-img" data-modal="modal15">
+                    <p>情感类别分布图</p>
+                </div>
+                <div class="image-item">
+                    <img src="16.jpg" alt="情感分数分布散点图" class="visualization-img" data-modal="modal16">
+                    <p>情感分数分布散点图</p>
+                </div>
+                <div class="image-item">
+                    <img src="17.jpg" alt="情感趋势变化图" class="visualization-img" data-modal="modal17">
+                    <p>情感趋势变化图</p>
+                </div>
+                <div class="image-item">
+                    <img src="18.jpg" alt="评论语义网络图" class="visualization-img" data-modal="modal18">
+                    <p>评论语义网络图</p>
+                </div>
+            </div>
+        </div>
+        <!-- 图片放大模态框 -->
+        <div id="modal1" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="img01">
+        </div>
+        <!-- 按照相同结构复制创建其他模态框 -->
+        <div id="modal2" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content">
+        </div>
+        <div id="modal3" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content">
+        </div>
+        <div id="modal4" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content">
+        </div>
+        <div id="modal5" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content">
+        </div>
+        <div id="modal6" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content">
+        </div>
+        <div id="modal7" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content">
+        </div>
+        <div id="modal8" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content">
+        </div>
+        <div id="modal9" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content">
+        </div>
+        <div id="modal10" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content">
+        </div>
+        <div id="modal11" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content">
+        </div>
+        <div id="modal12" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content">
+        </div>
+        <div id="modal13" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content">
+        </div>
+        <div id="modal14" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content">
+        </div>
+        <div id="modal15" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content">
+        </div>
+        <div id="modal16" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content">
+        </div>
+        <div id="modal17" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content">
+        </div>
+        <div id="modal18" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content">
+        </div>
+    </section>
+
+    <!-- 视频区域2 -->
+    <section class="video-section">
+        <h2>更多视频</h2>
+        <video id="video2" src="video2.mp4" controls></video>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>&copy; 2024 女性获奖者发言. All rights reserved. | 联系我们：15011195177</p>
+    </footer>
+
+    <!-- 背景音乐控制 -->
+    <div class="audio-control" id="audio-control">
+        <i class="fa fa-volume-up"></i>
+    </div>
+    <audio id="background-music" src="music1.mp3" loop muted></audio>
+
+    <script>
+        // 读取 Excel 文件
+        const readExcelFile = async (filePath) => {
+            try {
+                const response = await fetch(filePath);
+                if (!response.ok) {
+                    throw new Error(`无法加载文件: ${response.statusText}`);
+                }
+                const arrayBuffer = await response.arrayBuffer();
+                const workbook = XLSX.read(arrayBuffer, { type: 'array' });
+                const sheetName = workbook.SheetNames[0];
+                return XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+            } catch (error) {
+                console.error('读取Excel文件时出错:', error);
+                alert('加载演讲稿数据失败，请确保data.xlsx文件存在且格式正确。');
+                return [];
+            }
+        };
+
+        // 填充姓名选择框
+        const fillNameSelect = (data) => {
+            const nameSelect = document.getElementById('name-select');
+            // 清空已有的选项（除了第一个）
+            while (nameSelect.options.length > 1) {
+                nameSelect.remove(1);
+            }
+            
+            const names = [...new Set(data.map(item => item.姓名))];
+            names.forEach(name => {
+                const option = document.createElement('option');
+                option.value = name;
+                option.textContent = name;
+                nameSelect.appendChild(option);
+            });
+        };
+
+        // 显示演讲稿
+        const showSpeech = (data, name, language) => {
+            const speechText = document.getElementById('speech-text');
+            const selectedSpeech = data.find(item => item.姓名 === name);
+            
+            if (selectedSpeech) {
+                const content = selectedSpeech[language === 'chinese' ? '中文演讲稿' : '英文演讲稿'];
+                if (content) {
+                    speechText.innerHTML = content.replace(/\n/g, '<br>');
+                    speechText.style.display = 'block';
+                } else {
+                    speechText.innerHTML = `<p>未找到${language === 'chinese' ? '中文' : '英文'}演讲稿内容</p>`;
+                    speechText.style.display = 'block';
+                }
+            } else {
+                speechText.innerHTML = '<p>未找到该演讲者的相关信息</p>';
+                speechText.style.display = 'block';
+            }
+        };
+
+        // 页面加载时执行
+        window.onload = async () => {
+            try {
+                // 修改：Excel文件路径改为data.xlsx
+                const data = await readExcelFile('data.xlsx');
+                fillNameSelect(data);
+
+                const nameSelect = document.getElementById('name-select');
+                const confirmBtn = document.getElementById('confirm-btn');
+                const chineseBtn = document.getElementById('chinese-btn');
+                const englishBtn = document.getElementById('english-btn');
+                const videoBtn = document.getElementById('video-btn');
+                const speechText = document.getElementById('speech-text');
+
+                // 重置所有状态
+                const resetSpeechDisplay = () => {
+                    chineseBtn.style.display = 'none';
+                    englishBtn.style.display = 'none';
+                    videoBtn.style.display = 'none';
+                    speechText.style.display = 'none';
+                    speechText.innerHTML = '';
+                };
+
+                // 初始化重置
+                resetSpeechDisplay();
+
+                // 监听姓名选择变化
+                nameSelect.addEventListener('change', resetSpeechDisplay);
+
+                // 确认按钮点击事件
+                confirmBtn.addEventListener('click', () => {
+                    const selectedName = nameSelect.value;
+                    if (!selectedName) {
+                        alert('请先选择一个姓名');
+                        return;
+                    }
+
+                    // 显示语言选择按钮
+                    chineseBtn.style.display = 'inline-block';
+                    englishBtn.style.display = 'inline-block';
+                    
+                    // 检查是否有视频按钮
+                    const specialNames = ['热依扎', '张小斐', '黛米・摩尔（Demi Moore）', '蔡依林'];
+                    if (specialNames.includes(selectedName)) {
+                        videoBtn.style.display = 'inline-block';
+                        
+                        // 设置视频按钮的点击事件
+                        videoBtn.onclick = () => {
+                            let videoName;
+                            if (selectedName === '热依扎') videoName = 're';
+                            else if (selectedName === '张小斐') videoName = 'zhang';
+                            else if (selectedName === '黛米・摩尔（Demi Moore）') videoName = 'dai';
+                            else if (selectedName === '蔡依林') videoName = 'cai';
+                            
+                            const videoUrl = `${videoName}.mp4`;
+                            window.open(videoUrl, '_blank');
+                        };
+                    } else {
+                        videoBtn.style.display = 'none';
+                    }
+                });
+
+                // 中文按钮点击事件
+                chineseBtn.addEventListener('click', () => {
+                    const selectedName = nameSelect.value;
+                    if (selectedName) {
+                        showSpeech(data, selectedName, 'chinese');
+                    }
+                });
+
+                // 英文按钮点击事件
+                englishBtn.addEventListener('click', () => {
+                    const selectedName = nameSelect.value;
+                    if (selectedName) {
+                        showSpeech(data, selectedName, 'english');
+                    }
+                });
+            } catch (error) {
+                console.error('页面加载时出错:', error);
+                alert('页面加载失败，请稍后重试。');
+            }
+
+            // 图片放大功能
+            const modalImgs = document.querySelectorAll('.visualization-img');
+            const modals = document.querySelectorAll('.modal');
+            const closeBtns = document.querySelectorAll('.close');
+
+            modalImgs.forEach((img, index) => {
+                img.addEventListener('click', (e) => {
+                    const imgSrc = e.target.src;
+                    const modal = modals[index];
+                    const modalContent = modal.querySelector('.modal-content');
+                    modal.style.display = 'block';
+                    modalContent.src = imgSrc;
+                });
+            });
+
+            closeBtns.forEach(closeBtn => {
+                closeBtn.addEventListener('click', () => {
+                    const modal = closeBtn.closest('.modal');
+                    modal.style.display = 'none';
+                });
+            });
+
+            // 点击模态框背景关闭
+            modals.forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+            });
+
+            // 音频控制
+            const audioControl = document.getElementById('audio-control');
+            const backgroundMusic = document.getElementById('background-music');
+            
+            audioControl.addEventListener('click', () => {
+                if (backgroundMusic.muted) {
+                    backgroundMusic.muted = false;
+                    backgroundMusic.play();
+                    audioControl.innerHTML = '<i class="fa fa-volume-up"></i>';
+                } else {
+                    backgroundMusic.muted = true;
+                    audioControl.innerHTML = '<i class="fa fa-volume-off"></i>';
+                }
+            });
+
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        };
+    </script>
+</body>
+</html>
