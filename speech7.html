@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>女性获奖者发言</title>
+    <!-- Tailwind CSS v3 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- 自定义Tailwind配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4B0082',
+                        secondary: '#8A2BE2',
+                        accent: '#FFD700',
+                        gold: {
+                            light: '#FFD700',
+                            DEFAULT: '#ED8F03',
+                            dark: '#FFB75E'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Microsoft YaHei', 'sans-serif']
+                    },
+                    backgroundImage: {
+                        'gold-gradient': 'linear-gradient(135deg, #FFD700 0%, #FFB75E 50%, #ED8F03 100%)',
+                        'purple-gradient': 'linear-gradient(to right, #4B0082, #8A2BE2)',
+                        'display-case': "url('https://picsum.photos/id/1048/1200/800')",
+                        'glass-effect': 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0))',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- 自定义工具类 -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .text-shadow-light {
+                text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+            }
+            .transition-all-300 {
+                transition: all 0.3s ease;
+            }
+            .scale-hover {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .scale-hover:hover {
+                transform: scale(1.05);
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            }
+            .rotate-hover {
+                transition: transform 0.5s ease;
+            }
+            .rotate-hover:hover {
+                transform: rotate(3deg) scale(1.05);
+            }
+            .display-item {
+                position: absolute;
+                transition: all 0.5s ease;
+                filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.1)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+            }
+            .display-item:hover {
+                z-index: 20;
+                transform: scale(1.15);
+            }
+            .glass-effect {
+                background: rgba(255, 255, 255, 0.25);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.18);
+            }
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+                background-image: linear-gradient(to right, #4B0082, #8A2BE2);
+            }
+            .scroll-smooth {
+                scroll-behavior: smooth;
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+        }
+    </style>
+    
+    <!-- 基础样式 -->
+    <style>
+        body {
+            scroll-behavior: smooth;
+        }
+        
+        .hero-image {
+            filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+        }
+        
+        .modal {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #FFD700;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #4B0082;
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8A2BE2;
+        }
+        
+        /* 展示台样式 */
+        .trophy-display {
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+            background-image: var(--tw-bg-image);
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* 数据可视化卡片 */
+        .viz-card {
+            transition: all 0.3s ease;
+        }
+        
+        .viz-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* 新添加的样式 */
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        
+        .shine-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .shine-effect::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.3) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(30deg);
+            animation: shine 8s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(30deg); }
+            20%, 100% { transform: translateX(100%) rotate(30deg); }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #4B0082, #8A2BE2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .intro-section {
+            background: url('https://picsum.photos/id/1068/1920/1080') no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+        
+        .intro-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+        }
+        
+        .data-card {
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .data-card:hover {
+            transform: translateY(-15px);
+        }
+        
+        .data-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,0.2),
+                transparent
+            );
+            transition: all 0.6s ease;
+        }
+        
+        .data-card:hover::before {
+            left: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gold-gradient min-h-screen">
+    <!-- 顶部导航栏 -->
+    <nav id="navbar" class="fixed w-full top-0 z-50 bg-purple-gradient shadow-lg transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-2xl md:text-3xl font-bold text-white text-shadow">
+                女性获奖者发言
+            </h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-white hover:text-accent transition-all-300">首页</a>
+                <a href="#speech-db" class="nav-link text-white hover:text-accent transition-all-300">演讲稿库</a>
+                <a href="#visualization" class="nav-link text-white hover:text-accent transition-all-300">数据可视化</a>
+                <a href="#videos" class="nav-link text-white hover:text-accent transition-all-300">视频展示</a>
+            </div>
+            <!-- 移动端菜单按钮 -->
+            <button id="menu-toggle" class="md:hidden text-white text-2xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        <!-- 移动端导航菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-purple-gradient shadow-lg">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#home" class="text-white hover:text-accent py-2 border-b border-white/20">首页</a>
+                <a href="#speech-db" class="text-white hover:text-accent py-2 border-b border-white/20">演讲稿库</a>
+                <a href="#visualization" class="text-white hover:text-accent py-2 border-b border-white/20">数据可视化</a>
+                <a href="#videos" class="text-white hover:text-accent py-2">视频展示</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section id="home" class="pt-24 md:pt-32 pb-16 md:pb-24">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-bold text-primary mb-8 text-shadow-light">
+                女性获奖者发言
+            </h1>
+            
+            <!-- 奖杯展示台 -->
+            <div class="trophy-display bg-display-case relative mb-12 rounded-3xl overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-b from-black/60 to-black/20"></div>
+                
+                <!-- 奖杯展示 - 不规则布局 -->
+                <div class="display-item w-24 md:w-32 top-[15%] left-[10%] rotate-hover floating">
+                    <img src="jiangbei1.jpg" alt="奖杯1" class="hero-image rounded-lg w-full h-auto object-cover shine-effect">
+                </div>
+                <div class="display-item w-20 md:w-28 top-[30%] left-[25%] rotate-hover floating" style="animation-delay: 0.5s">
+                    <img src="jiangbei2.jpg" alt="奖杯2" class="hero-image rounded-lg w-full h-auto object-cover shine-effect">
+                </div>
+                <div class="display-item w-28 md:w-36 top-[20%] left-[45%] rotate-hover floating" style="animation-delay: 1s">
+                    <img src="jiangbei3.jpg" alt="奖杯3" class="hero-image rounded-lg w-full h-auto object-cover shine-effect">
+                </div>
+                <div class="display-item w-24 md:w-32 top-[40%] left-[65%] rotate-hover floating" style="animation-delay: 1.5s">
+                    <img src="jiangbei4.jpg" alt="奖杯4" class="hero-image rounded-lg w-full h-auto object-cover shine-effect">
+                </div>
+                <div class="display-item w-20 md:w-28 top-[60%] left-[15%] rotate-hover floating" style="animation-delay: 2s">
+                    <img src="jiangbei5.jpg" alt="奖杯5" class="hero-image rounded-lg w-full h-auto object-cover shine-effect">
+                </div>
+                <div class="display-item w-28 md:w-36 top-[50%] left-[35%] rotate-hover floating" style="animation-delay: 2.5s">
+                    <img src="jiangbei6.jpg" alt="奖杯6" class="hero-image rounded-lg w-full h-auto object-cover shine-effect">
+                </div>
+                <div class="display-item w-24 md:w-32 top-[65%] left-[55%] rotate-hover floating" style="animation-delay: 3s">
+                    <img src="jiangbei7.jpg" alt="奖杯7" class="hero-image rounded-lg w-full h-auto object-cover shine-effect">
+                </div>
+                <div class="display-item w-20 md:w-28 top-[35%] left-[80%] rotate-hover floating" style="animation-delay: 3.5s">
+                    <img src="jiangbei8.jpg" alt="奖杯8" class="hero-image rounded-lg w-full h-auto object-cover shine-effect">
+                </div>
+                
+                <!-- 展示台装饰元素 -->
+                <div class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-black/80 to-transparent"></div>
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4/5 h-4/5 border-2 border-gold-light/30 rounded-full"></div>
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/5 h-3/5 border border-gold-light/20 rounded-full"></div>
+            </div>
+            
+            <!-- 话筒图片 -->
+            <div class="mt-8 md:mt-4">
+                <div class="inline-block scale-hover">
+                    <img src="huatong.jpg" alt="话筒" class="hero-image rounded-xl w-3/4 md:w-1/2 lg:w-2/5 h-auto mx-auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 介绍段落 -->
+    <section class="py-16 intro-section relative">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto glass-effect rounded-3xl p-8 md:p-12 shadow-2xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-gradient mb-6">关于我们</h2>
+                <p class="text-lg md:text-xl text-gray-800 leading-relaxed text-center">
+                    这个网站集合了国内外颁奖典礼的女性获奖者的发言，呈现了发言稿集锦、发言视频、发言文本可视化、社交媒体传播效果可视化、AI融合作品等部分，希望可以展现聚光灯下的女性形象。我们致力于为您提供最真实、最动人的女性声音，共同见证她们在各个领域的杰出成就与精彩发言。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 视频区域1 -->
+    <section id="videos" class="py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary mb-8">精选视频</h2>
+            <div class="bg-white/30 backdrop-blur-sm rounded-2xl p-4 shadow-xl max-w-4xl mx-auto">
+                <video id="video1" class="w-full h-auto rounded-xl shadow-2xl" controls autoplay muted>
+                    <source src="video1.mp4" type="video/mp4">
+                    您的浏览器不支持视频播放
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- 演讲稿数据库 -->
+    <section id="speech-db" class="py-16 bg-white/20 backdrop-blur-md">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary mb-8 text-center">演讲稿数据库</h2>
+            
+            <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 shadow-xl max-w-4xl mx-auto">
+                <div class="mb-8">
+                    <label for="name-select" class="block text-lg font-semibold mb-3 text-gray-800">选择演讲者:</label>
+                    <select id="name-select" class="w-full md:w-auto px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring focus:ring-primary/20 transition-all-300">
+                        <option value="">请选择演讲者</option>
+                        <option value="Mikey Madison">Mikey Madison</option>
+                        <option value="Zoe Saldaña">Zoe Saldaña</option>
+                        <option value="Emma Stone">Emma Stone</option>
+                        <option value="Da'Vine Joy Randolph">Da'Vine Joy Randolph</option>
+                        <option value="Angela Bassett">Angela Bassett</option>
+                        <option value="Michelle Yeoh">Michelle Yeoh</option>
+                        <option value="Jamie Lee Curtis">Jamie Lee Curtis</option>
+                        <option value="Jessica Chastain">Jessica Chastain</option>
+                        <option value="Ariana DeBose">Ariana DeBose</option>
+                        <option value="Frances McDormand">Frances McDormand</option>
+                        <option value="Yuh-Jung Youn">Yuh-Jung Youn</option>
+                        <option value="Renée Zellweger">Renée Zellweger</option>
+                        <option value="Laura Dern">Laura Dern</option>
+                        <option value="Olivia Colman">Olivia Colman</option>
+                        <option value="Regina King">Regina King</option>
+                        <option value="Allison Janney">Allison Janney</option>
+                        <option value="Viola Davis">Viola Davis</option>
+                        <option value="Brie Larson">Brie Larson</option>
+                        <option value="Alicia Vikander">Alicia Vikander</option>
+                        <option value="Gena Rowlands">Gena Rowlands</option>
+                        <option value="Julianne Moore">Julianne Moore</option>
+                        <option value="Patricia Arquette">Patricia Arquette</option>
+                        <option value="Cate Blanchett">Cate Blanchett</option>
+                        <option value="Lupita Nyong'o">Lupita Nyong'o</option>
+                        <option value="Jennifer Lawrence">Jennifer Lawrence</option>
+                        <option value="Anne Hathaway">Anne Hathaway</option>
+                        <option value="Meryl Streep">Meryl Streep</option>
+                        <option value="Octavia Spencer">Octavia Spencer</option>
+                        <option value="Oprah Winfrey">Oprah Winfrey</option>
+                        <option value="Natalie Portman">Natalie Portman</option>
+                        <option value="Melissa Leo">Melissa Leo</option>
+                        <option value="Sandra Bullock">Sandra Bullock</option>
+                        <option value="Mo'Nique">Mo'Nique</option>
+                        <option value="Kate Winslet">Kate Winslet</option>
+                        <option value="Penélope Cruz">Penélope Cruz</option>
+                        <option value="Marion Cotillard">Marion Cotillard</option>
+                        <option value="Tilda Swinton">Tilda Swinton</option>
+                        <option value="Helen Mirren">Helen Mirren</option>
+                        <option value="Jennifer Hudson">Jennifer Hudson</option>
+                        <option value="Reese Witherspoon">Reese Witherspoon</option>
+                        <option value="Rachel Weisz">Rachel Weisz</option>
+                        <option value="Hilary Swank">Hilary Swank</option>
+                        <option value="Charlize Theron">Charlize Theron</option>
+                        <option value="Nicole Kidman">Nicole Kidman</option>
+                        <option value="Catherine Zeta-Jones">Catherine Zeta-Jones</option>
+                        <option value="Halle Berry">Halle Berry</option>
+                        <option value="Jennifer Connelly">Jennifer Connelly</option>
+                        <option value="Julia Roberts">Julia Roberts</option>
+                        <option value="Marcia Gay Harden">Marcia Gay Harden</option>
+                        <option value="热依扎">热依扎</option>
+                        <option value="张小斐">张小斐</option>
+                        <option value="黛米・摩尔（Demi Moore）">黛米・摩尔（Demi Moore）</option>
+                        <option value="张伟丽">张伟丽</option>
+                        <option value="屠呦呦">屠呦呦</option>
+                        <option value="蔡依林">蔡依林</option>
+                        <option value="安藤樱">安藤樱</option>
+                        <option value="贾玲">贾玲</option>
+                        <option value="Justine Triet">Justine Triet</option>
+                        <option value="董明珠">董明珠</option>
+                    </select>
+                </div>
+                
+                <div id="speech-controls" class="mb-6 hidden">
+                    <button id="chinese-btn" class="bg-primary hover:bg-secondary text-white px-6 py-3 rounded-lg mr-4 transition-all-300 shadow-lg hover:shadow-xl flex items-center">
+                        <i class="fa fa-language mr-2"></i>中文版本
+                    </button>
+                    <button id="english-btn" class="bg-primary hover:bg-secondary text-white px-6 py-3 rounded-lg transition-all-300 shadow-lg hover:shadow-xl flex items-center">
+                        <i class="fa fa-language mr-2"></i>英文版本
+                    </button>
+                    <button id="video-btn" class="bg-accent hover:bg-accent/80 text-primary px-6 py-3 rounded-lg ml-4 transition-all-300 shadow-lg hover:shadow-xl hidden flex items-center">
+                        <i class="fa fa-play-circle mr-2"></i>观看视频
+                    </button>
+                </div>
+                
+                <div id="speech-content" class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 min-h-[200px] hidden">
+                    <h3 id="speech-title" class="text-xl md:text-2xl font-bold text-primary mb-4"></h3>
+                    <div id="speech-text" class="text-gray-700 leading-relaxed"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 数据可视化部分 -->
+    <section id="visualization" class="py-16 bg-gradient-to-b from-white/10 to-white/30">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary mb-12 text-center">数据可视化</h2>
+            
+            <!-- 发言稿文本分析 -->
+            <div class="mb-16">
+                <h3 class="text-2xl md:text-3xl font-bold text-primary mb-8 text-center">发言稿文本分析</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="data-card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden rounded-2xl">
+                        <img src="1.jpg" alt="中文词云图" class="w-full h-auto cursor-pointer visualization-img" data-img="1.jpg">
+                        <div class="p-4">
+                            <h4 class="font-semibold text-gray-800">中文词云图</h4>
+                            <p class="text-sm text-gray-600 mt-2">展示中文演讲稿中出现频率较高的词汇</p>
+                        </div>
+                    </div>
+                    <div class="data-card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden rounded-2xl">
+                        <img src="2.jpg" alt="英文词云图" class="w-full h-auto cursor-pointer visualization-img" data-img="2.jpg">
+                        <div class="p-4">
+                            <h4 class="font-semibold text-gray-800">英文词云图</h4>
+                            <p class="text-sm text-gray-600 mt-2">展示英文演讲稿中出现频率较高的词汇</p>
+                        </div>
+                    </div>
+                    <div class="data-card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden rounded-2xl">
+                        <img src="3.jpg" alt="发言高频词" class="w-full h-auto cursor-pointer visualization-img" data-img="3.jpg">
+                        <div class="p-4">
+                            <h4 class="font-semibold text-gray-800">发言高频词</h4>
+                            <p class="text-sm text-gray-600 mt-2">分析演讲稿中出现频率最高的词汇分布</p>
+                        </div>
+                    </div>
+                    <div class="data-card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden rounded-2xl">
+                        <img src="4.jpg" alt="主题一致性" class="w-full h-auto cursor-pointer visualization-img" data-img="4.jpg">
+                        <div class="p-4">
+                            <h4 class="font-semibold text-gray-800">主题一致性</h4>
+                            <p class="text-sm text-gray-600 mt-2">分析演讲稿主题的连贯性和一致性</p>
+                        </div>
+                    </div>
+                    <div class="data-card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden rounded-2xl">
+                        <img src="5.jpg" alt="主题困惑度" class="w-full h-auto cursor-pointer visualization-img" data-img="5.jpg">
+                        <div class="p-4">
+                            <h4 class="font-semibold text-gray-800">主题困惑度</h4>
+                            <p class="text-sm text-gray-600 mt-2">评估演讲稿主题的清晰度和可理解性</p>
+                        </div>
+                    </div>
+                    <div class="data-card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden rounded-2xl">
+                        <img src="6.jpg" alt="主题分类" class="w-full h-auto cursor-pointer visualization-img" data-img="6.jpg">
+                        <div class="p-4">
+                            <h4 class="font-semibold text-gray-800">主题分类</h4>
+                            <p class="text-sm text-gray-600 mt-2">对演讲稿内容进行自动主题分类</p>
+                        </div>
+                    </div>
+                    <div class="data-card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden rounded-2xl">
+                        <img src="7.jpg" alt="主题人工编码" class="w-full h-auto cursor-pointer visualization-img" data-img="7.jpg">
+                        <div class="p-4">
+                            <h4 class="font-semibold text-gray-800">主题人工编码</h4>
+                            <p class="text-sm text-gray-600 mt-2">人工标注的演讲稿主题分类结果</p>
+                        </div>
+                    </div>
+                    <div class="data-card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden rounded-2xl">
+                        <img src="8.jpg" alt="主题气泡图" class="w-full h-auto cursor-pointer visualization-img" data-img="8.jpg">
+                        <div class="p-4">
+                            <h4 class="font-semibold text-gray-800">主题气泡图</h4>
+                            <p class="text-sm text-gray-600 mt-2">以气泡大小和颜色表示主题分布</p>
+                        </div>
+                    </div>
+                    <div class="data-card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden rounded-2xl">
+                        <img src="9.jpg" alt="主题聚类图" class="w-full h-auto cursor-pointer visualization-img" data-img="9.jpg">
+                        <div class="p-4">
+                            <h4 class="font-semibold text-gray-800">主题聚类图</h4>
+                            <p class="text-sm text-gray-600 mt-2">展示演讲稿主题之间的聚类关系</p>
+                        </div>
+                    </div>
+                    <div class="data-card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden rounded-2xl">
+                        <img src="10.jpg" alt="主题聚类图升级版" class="w-full h-auto cursor-pointer visualization-img" data-img="10.jpg">
+                        <div class="p-4">
+                            <h4 class="font-semibold text-gray-800">主题聚类图升级版</h4>
+                            <p class="text-sm text-gray-600 mt-2">更详细的演讲稿主题聚类分析</p>
+                        </div>
+                    </div>
+                    <div class="data-card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden rounded-2xl">
+                        <img src="11.jpg" alt="发言语义网络图" class="w-full h-auto cursor-pointer visualization-img" data-img="11.jpg">
+                        <div class="p-4">
+                            <h4 class="font-semibold text-gray-800">发言语义网络图</h4>
+                            <p class="text-sm text-gray-600 mt-2">展示演讲稿中词汇之间的语义关系</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 弹幕评论文本分析 -->
+            <div>
+                <h3 class="text-2xl md:text-3xl font-bold text-primary mb-8 text-center">弹幕评论文本分析</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="data-card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden rounded-2xl">
+                        <img src="12.jpg" alt="评论词云图" class="w-full h-auto cursor-pointer visualization-img" data-img="12.jpg">
+                        <div class="p-4">
+                            <h4 class="font-semibold text-gray-800">评论词云图</h4>
+                            <p class="text-sm text-gray-600 mt-2">展示观众评论中出现频率较高的词汇</p>
+                        </div>
+                    </div>
+                    <div class="data-card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden rounded-2xl">
+                        <img src="13.jpg" alt="评论高频词" class="w-full h-auto cursor-pointer visualization-img" data-img="13.jpg">
+                        <div class="p-4">
+                            <h4 class="font-semibold text-gray-800">评论高频词</h4>
+                            <p class="text-sm text-gray-600 mt-2">分析观众评论中出现频率最高的词汇</p>
+                        </div>
+                    </div>
+                    <div class="data-card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden rounded-2xl">
+                        <img src="14.jpg" alt="情感分布比例图" class="w-full h-auto cursor-pointer visualization-img" data-img="14.jpg">
+                        <div class="p-4">
+                            <h4 class="font-semibold text-gray-800">情感分布比例图</h4>
+                            <p class="text-sm text-gray-600 mt-2">展示观众评论中的情感倾向分布</p>
+                        </div>
+                    </div>
+                    <div class="data-card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden rounded-2xl">
+                        <img src="15.jpg" alt="情感类别分布图" class="w-full h-auto cursor-pointer visualization-img" data-img="15.jpg">
+                        <div class="p-4">
+                            <h4 class="font-semibold text-gray-800">情感类别分布图</h4>
+                            <p class="text-sm text-gray-600 mt-2">详细分类的观众评论情感分析</p>
+                        </div>
+                    </div>
+                    <div class="data-card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden rounded-2xl">
+                        <img src="16.jpg" alt="情感分数分布散点图" class="w-full h-auto cursor-pointer visualization-img" data-img="16.jpg">
+                        <div class="p-4">
+                            <h4 class="font-semibold text-gray-800">情感分数分布散点图</h4>
+                            <p class="text-sm text-gray-600 mt-2">展示观众评论情感分数的分布情况</p>
+                        </div>
+                    </div>
+                    <div class="data-card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden rounded-2xl">
+                        <img src="17.jpg" alt="情感趋势变化图" class="w-full h-auto cursor-pointer visualization-img" data-img="17.jpg">
+                        <div class="p-4">
+                            <h4 class="font-semibold text-gray-800">情感趋势变化图</h4>
+                            <p class="text-sm text-gray-600 mt-2">分析观众评论情感随时间的变化趋势</p>
+                        </div>
+                    </div>
+                    <div class="data-card bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden rounded-2xl">
+                        <img src="18.jpg" alt="评论语义网络图" class="w-full h-auto cursor-pointer visualization-img" data-img="18.jpg">
+                        <div class="p-4">
+                            <h4 class="font-semibold text-gray-800">评论语义网络图</h4>
+                            <p class="text-sm text-gray-600 mt-2">展示观众评论中词汇之间的语义关系</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 视频区域2 -->
+    <section class="py-16 bg-white/20 backdrop-blur-md">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-primary mb-8">更多视频</h2>
+            <div class="bg-white/30 backdrop-blur-sm rounded-2xl p-4 shadow-xl max-w-4xl mx-auto">
+                <video id="video2" class="w-full h-auto rounded-xl shadow-2xl" controls>
+                    <source src="video2.mp4" type="video/mp4">
+                    您的浏览器不支持视频播放
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-purple-gradient text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-lg">&copy; 2024 女性获奖者发言. All rights reserved.</p>
+            <p class="mt-2">联系我们：15011195177</p>
+        </div>
+    </footer>
+
+    <!-- 图片放大模态框 -->
+    <div id="image-modal" class="modal fixed inset-0 bg-black/80 z-50 flex items-center justify-center">
+        <div class="relative w-full max-w-4xl p-4">
+            <button id="close-modal" class="absolute -top-12 right-0 text-white text-3xl hover:text-accent transition-all-300">
+                <i class="fa fa-times"></i>
+            </button>
+            <img id="modal-image" class="w-full h-auto rounded-xl shadow-2xl" src="" alt="放大的图片">
+        </div>
+    </div>
+
+    <!-- 背景音乐控制 -->
+    <div id="music-control" class="fixed bottom-6 right-6 bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-xl cursor-pointer z-40 transition-all-300 hover:bg-white">
+        <i id="music-icon" class="fa fa-volume-up text-primary text-xl"></i>
+    </div>
+    <audio id="background-music" src="music1.mp3" loop muted></audio>
+
+    <script>
+        // 演讲稿数据
+        const speechData = {
+            "Mikey Madison": {
+                chinese: "哇，这感觉太不真实了。请原谅我，我很紧张。我要照着稿子念，但...非常感谢学院。我在洛杉矶长大，但好莱坞总觉得离我很遥远，所以今天能站在这个房间里真的不可思议。谢谢Neon、FilmNation、环球。感谢我了不起的家人：我的妈妈、爸爸、姐姐、弟弟和双胞胎哥哥迈尔斯。谢谢你成为我最好的朋友，虽然你也没得选。谢谢肖恩·贝克、萨米·权、亚历克斯·科科、德鲁·丹尼尔斯、尤拉、马克、瓦切、卡伦。谢谢安妮·伍德沃德、瑞秋·阿洛克、尼基·菲奥拉万特、里奇、迪恩、丹、唐、法里德·沃德。谢谢布莱顿海滩，谢谢你们借给我们美丽的背景和了不起的社区。还要感谢肯尼迪·施奈德。感谢我们了不起的顾问们。我还想再次认可和尊重性工作者群体。我将继续支持并成为他们的盟友。我有幸从这个群体中认识的所有了不起的人，那些女性，是这段令人难以置信的经历中最精彩的亮点之一。我也想认可我的 fellow提名者们深思熟虑、聪明、美丽、令人惊叹的作品。能与你们所有人一起获得认可，我感到很荣幸。这是梦想成真；我可能明天就会醒来。非常感谢，肖恩。我爱你。这一切，我的一切，都是因为你。谢谢。",
+                english: "Wow, this is very surreal. Forgive me, I'm nervous. I'm gonna read off of a paper, but... Thank you so much to the Academy. I grew up in Los Angeles but Hollywood always felt so far away from me, so to be here standing in this room today is really incredible. Thank you, Neon, FilmNation, Universal. Thank you to my incredible family: my mom and my dad and my sister and my little brother and my twin brother Miles. Thank you for being my best friend, not that you have a choice. Thank you, Sean Baker, Sammy Quan, Alex Coco, Drew Daniels, Yura, Mark, Vache, Karren. Thank you, Anne Woodward, Rachel Arlook, Nicki Fioravante, Rich, Dean, Dan, Don, Fareed Ward. Thank you, Brighton Beach, for lending us your, yeah, your beautiful backdrop and incredible community. Also thank you to Kennady Schneider. Thank you to our incredible consultants. I also just want to again recognize and honor the sex worker community. I will continue to support and be an ally. All of the incredible people, the women that I've had the privilege of meeting from that community, has been one of the highlights of this incredible, of this entire incredible experience. I also just want to recognize the thoughtful, intelligent, beautiful, breathtaking work of my fellow nominees. I'm honored to be recognized alongside all of you. This is a dream come true; I'm probably gonna wake up tomorrow. Thank you so much, Sean. I adore you. This is, my, this is all because of you. Thank you."
+            },
+            "热依扎": {
+                chinese: "新时代的女性不哭。我很幸运，很有福气。感谢组委会，感谢观众朋友们对我的认可，也请让我用自己的本民族的语言对大家说声谢谢（哈萨克语）。《山海情》不论是在距离还是在现实当中都体现了中国人民的友爱团结、齐心协助共赴美好生活、美好目标的力量。今天可以站在这个舞台上得这个奖，不是我一个人能做到的，是我们整个《山海情》团队的努力。\n\n感谢孔笙导演，当时给一个刚当妈妈的女演员机会；感谢侯鸿亮先生；感谢孙墨龙导演；感谢王三毛编剧老师和编剧团队；感谢我所有的对手戏演员们；感谢全组的幕后工作人员们；感谢我的家人；还有感谢我的月嫂，我当时说‘如果有一天我得奖，我会谢谢你’；感谢我的经纪公司仨仁传媒；感谢我的经纪团队们；感谢福建宁夏两地的人民，因为你们努力，我们才有了《山海情》；感谢我的电影学院的老师李克己；谢谢这一路以来，用过我的导演和制片人们。演员热依扎，谢谢大家！",
+                english: ""
+            }
+        };
+
+        // 视频映射
+        const videoMap = {
+            "热依扎": "re.mp4",
+            "张小斐": "zhang.mp4",
+            "黛米・摩尔（Demi Moore）": "dai.mp4",
+            "蔡依林": "cai.mp4"
+        };
+
+        // DOM元素
+        const nameSelect = document.getElementById('name-select');
+        const speechControls = document.getElementById('speech-controls');
+        const chineseBtn = document.getElementById('chinese-btn');
+        const englishBtn = document.getElementById('english-btn');
+        const videoBtn = document.getElementById('video-btn');
+        const speechContent = document.getElementById('speech-content');
+        const speechTitle = document.getElementById('speech-title');
+        const speechText = document.getElementById('speech-text');
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navbar = document.getElementById('navbar');
+        const visualizationImgs = document.querySelectorAll('.visualization-img');
+        const imageModal = document.getElementById('image-modal');
+        const modalImage = document.getElementById('modal-image');
+        const closeModal = document.getElementById('close-modal');
+        const musicControl = document.getElementById('music-control');
+        const musicIcon = document.getElementById('music-icon');
+        const backgroundMusic = document.getElementById('background-music');
+
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', () => {
+            // 初始化背景音乐
+            backgroundMusic.play().catch(e => console.log('自动播放音乐失败:', e));
+            
+            // 导航栏滚动效果
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('py-2');
+                    navbar.classList.remove('py-3');
+                    navbar.classList.add('shadow-xl');
+                } else {
+                    navbar.classList.add('py-3');
+                    navbar.classList.remove('py-2');
+                    navbar.classList.remove('shadow-xl');
+                }
+            });
+            
+            // 移动端菜单切换
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // 导航链接点击事件
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    // 关闭移动端菜单
+                    mobileMenu.classList.add('hidden');
+                    
+                    // 平滑滚动到目标位置
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // 演讲稿选择事件
+            nameSelect.addEventListener('change', (e) => {
+                const selectedName = e.target.value;
+                
+                if (selectedName) {
+                    speechControls.classList.remove('hidden');
+                    
+                    // 检查是否有对应的视频
+                    if (videoMap[selectedName]) {
+                        videoBtn.classList.remove('hidden');
+                        videoBtn.onclick = () => {
+                            window.open(videoMap[selectedName], '_blank');
+                        };
+                    } else {
+                        videoBtn.classList.add('hidden');
+                    }
+                    
+                    // 设置演讲稿标题
+                    speechTitle.textContent = selectedName;
+                    
+                    // 中文按钮点击事件
+                    chineseBtn.onclick = () => {
+                        speechContent.classList.remove('hidden');
+                        
+                        if (speechData[selectedName] && speechData[selectedName].chinese) {
+                            speechText.textContent = speechData[selectedName].chinese;
+                        } else {
+                            speechText.textContent = "抱歉，没有找到该演讲者的中文演讲稿。";
+                        }
+                    };
+                    
+                    // 英文按钮点击事件
+                    englishBtn.onclick = () => {
+                        speechContent.classList.remove('hidden');
+                        
+                        if (speechData[selectedName] && speechData[selectedName].english) {
+                            speechText.textContent = speechData[selectedName].english;
+                        } else {
+                            speechText.textContent = "抱歉，没有找到该演讲者的英文演讲稿。";
+                        }
+                    };
+                } else {
+                    speechControls.classList.add('hidden');
+                    speechContent.classList.add('hidden');
+                }
+            });
+            
+            // 图片点击放大
+            visualizationImgs.forEach(img => {
+                img.addEventListener('click', (e) => {
+                    const imgSrc = e.target.src;
+                    modalImage.src = imgSrc;
+                    imageModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // 关闭模态框
+            closeModal.addEventListener('click', () => {
+                imageModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // 点击模态框背景关闭
+            imageModal.addEventListener('click', (e) => {
+                if (e.target === imageModal) {
+                    imageModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // 背景音乐控制
+            musicControl.addEventListener('click', () => {
+                if (backgroundMusic.muted) {
+                    backgroundMusic.muted = false;
+                    musicIcon.classList.remove('fa-volume-off');
+                    musicIcon.classList.add('fa-volume-up');
+                } else {
+                    backgroundMusic.muted = true;
+                    musicIcon.classList.remove('fa-volume-up');
+                    musicIcon.classList.add('fa-volume-off');
+                }
+            });
+            
+            // 视频控制
+            const videos = document.querySelectorAll('video');
+            videos.forEach(video => {
+                video.addEventListener('click', () => {
+                    if (video.paused) {
+                        video.play();
+                    } else {
+                        video.pause();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>    
