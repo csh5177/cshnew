@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>女性获奖者发言</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4B0082',
+                        secondary: '#8A2BE2',
+                        accent: '#FFD700',
+                        dark: '#333333',
+                        light: '#F5F5F5'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .gradient-bg {
+                background: linear-gradient(135deg, #FFD700 0%, #FFB75E 50%, #ED8F03 100%);
+            }
+            .nav-gradient {
+                background: linear-gradient(to right, #4B0082, #8A2BE2);
+            }
+            .glass-effect {
+                background: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(10px);
+            }
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .text-shadow-light {
+                text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            }
+            .trophy-item {
+                display: inline-block;
+                margin: 0.5rem;
+                transition: all 0.3s ease;
+            }
+            .trophy-item:hover {
+                transform: translateY(-8px) scale(1.05);
+            }
+        }
+    </style>
+</head>
+
+<body class="font-inter gradient-bg text-dark">
+    <!-- 顶部导航栏 -->
+    <nav class="nav-gradient text-white sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-shadow">女性获奖者发言</h1>
+            <ul class="hidden md:flex space-x-6">
+                <li><a href="#home" class="hover:text-accent transition-colors duration-300">首页</a></li>
+                <li><a href="#speech-db" class="hover:text-accent transition-colors duration-300">演讲稿库</a></li>
+                <li><a href="#visualization" class="hover:text-accent transition-colors duration-300">数据可视化</a></li>
+                <li><a href="#videos" class="hover:text-accent transition-colors duration-300">视频展示</a></li>
+            </ul>
+            <button class="md:hidden text-2xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section id="home" class="py-12 text-center">
+        <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-primary mb-8 text-shadow-light">女性获奖者发言</h1>
+        <div class="trophy-container max-w-6xl mx-auto px-4">
+            <!-- 奖杯展示 - 不规则排列，移除文字 -->
+            <div class="trophy-item transform -rotate-6">
+                <img src="https://picsum.photos/seed/trophy1/200/200" alt="奖杯1" class="w-24 h-auto rounded-lg shadow-lg card-hover">
+            </div>
+            <div class="trophy-item transform rotate-3 mt-4">
+                <img src="https://picsum.photos/seed/trophy2/200/200" alt="奖杯2" class="w-28 h-auto rounded-lg shadow-lg card-hover">
+            </div>
+            <div class="trophy-item transform -rotate-2 mt-2">
+                <img src="https://picsum.photos/seed/trophy3/200/200" alt="奖杯3" class="w-22 h-auto rounded-lg shadow-lg card-hover">
+            </div>
+            <div class="trophy-item transform rotate-5 mt-6">
+                <img src="https://picsum.photos/seed/trophy4/200/200" alt="奖杯4" class="w-26 h-auto rounded-lg shadow-lg card-hover">
+            </div>
+            <div class="trophy-item transform -rotate-4">
+                <img src="https://picsum.photos/seed/trophy5/200/200" alt="奖杯5" class="w-20 h-auto rounded-lg shadow-lg card-hover">
+            </div>
+            <div class="trophy-item transform rotate-2 mt-3">
+                <img src="https://picsum.photos/seed/trophy6/200/200" alt="奖杯6" class="w-30 h-auto rounded-lg shadow-lg card-hover">
+            </div>
+            <div class="trophy-item transform -rotate-3 mt-5">
+                <img src="https://picsum.photos/seed/trophy7/200/200" alt="奖杯7" class="w-24 h-auto rounded-lg shadow-lg card-hover">
+            </div>
+            <div class="trophy-item transform rotate-4 mt-1">
+                <img src="https://picsum.photos/seed/trophy8/200/200" alt="奖杯8" class="w-27 h-auto rounded-lg shadow-lg card-hover">
+            </div>
+        </div>
+        <!-- 放大的话筒图片，位于奖杯下方，无文字 -->
+        <div class="microphone-container mt-12">
+            <img src="https://picsum.photos/seed/microphone/400/400" alt="话筒" class="w-64 h-auto mx-auto rounded-xl shadow-2xl card-hover">
+        </div>
+    </section>
+
+    <!-- 介绍段落 -->
+    <section class="py-10 glass-effect rounded-2xl max-w-5xl mx-auto px-6 shadow-xl my-12">
+        <p class="text-lg md:text-xl text-center leading-relaxed">
+            这个网站集合了国内外颁奖典礼的女性获奖者的发言，呈现了发言稿集锦、发言视频、发言文本可视化、社交媒体传播效果可视化、AI融合作品等部分，希望可以展现聚光灯下的女性形象。
+        </p>
+    </section>
+
+    <!-- 视频区域1 -->
+    <section id="videos" class="py-10 max-w-5xl mx-auto px-4 my-12">
+        <h2 class="text-2xl md:text-3xl font-bold text-primary mb-6 text-center">精选视频</h2>
+        <div class="relative rounded-xl overflow-hidden shadow-2xl">
+            <video id="video1" class="w-full h-auto" controls poster="https://picsum.photos/seed/video1/800/450">
+                <source src="https://samplelib.com/lib/preview/mp4/sample-5s.mp4" type="video/mp4">
+                您的浏览器不支持视频播放
+            </video>
+        </div>
+    </section>
+
+    <!-- 演讲稿数据库 -->
+    <section id="speech-db" class="py-10 glass-effect rounded-2xl max-w-5xl mx-auto px-6 shadow-xl my-12">
+        <h2 class="text-2xl md:text-3xl font-bold text-primary mb-6 text-center">演讲稿数据库</h2>
+        
+        <div class="flex flex-col items-center">
+            <div class="w-full max-w-md mb-8">
+                <label for="name-select" class="block text-lg font-medium text-primary mb-2">选择获奖者:</label>
+                <select id="name-select" class="w-full px-4 py-3 rounded-lg shadow-md border-none focus:ring-2 focus:ring-primary focus:outline-none">
+                    <option value="">请选择获奖者姓名</option>
+                </select>
+            </div>
+            
+            <div id="speech-display" class="w-full">
+                <div id="speech-text" class="bg-white p-6 rounded-xl shadow-lg hidden">
+                    <div id="loading-indicator" class="text-center py-8 hidden">
+                        <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+                        <p class="mt-2 text-primary">加载中...</p>
+                    </div>
+                    <h3 id="speech-title" class="text-xl font-bold text-primary mb-4"></h3>
+                    <div id="speech-content" class="prose max-w-none"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 数据可视化部分 -->
+    <section id="visualization" class="py-10 max-w-6xl mx-auto px-4 my-12">
+        <h2 class="text-2xl md:text-3xl font-bold text-primary mb-8 text-center">数据可视化</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-white rounded-2xl shadow-xl p-6">
+                <h3 class="text-xl font-bold text-primary mb-6">发言稿文本分析</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="card-hover">
+                        <img src="https://picsum.photos/seed/wordcloud1/400/300" alt="中文词云图" class="w-full h-auto rounded-lg shadow-md">
+                        <p class="font-semibold text-primary mt-2 text-center">中文词云图</p>
+                    </div>
+                    <div class="card-hover">
+                        <img src="https://picsum.photos/seed/wordcloud2/400/300" alt="英文词云图" class="w-full h-auto rounded-lg shadow-md">
+                        <p class="font-semibold text-primary mt-2 text-center">英文词云图</p>
+                    </div>
+                    <div class="card-hover">
+                        <img src="https://picsum.photos/seed/freqwords/400/300" alt="发言高频词" class="w-full h-auto rounded-lg shadow-md">
+                        <p class="font-semibold text-primary mt-2 text-center">发言高频词</p>
+                    </div>
+                    <div class="card-hover">
+                        <img src="https://picsum.photos/seed/topic/400/300" alt="主题一致性" class="w-full h-auto rounded-lg shadow-md">
+                        <p class="font-semibold text-primary mt-2 text-center">主题一致性</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-xl p-6">
+                <h3 class="text-xl font-bold text-primary mb-6">弹幕评论文本分析</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="card-hover">
+                        <img src="https://picsum.photos/seed/comment1/400/300" alt="评论词云图" class="w-full h-auto rounded-lg shadow-md">
+                        <p class="font-semibold text-primary mt-2 text-center">评论词云图</p>
+                    </div>
+                    <div class="card-hover">
+                        <img src="https://picsum.photos/seed/comment2/400/300" alt="评论高频词" class="w-full h-auto rounded-lg shadow-md">
+                        <p class="font-semibold text-primary mt-2 text-center">评论高频词</p>
+                    </div>
+                    <div class="card-hover">
+                        <img src="https://picsum.photos/seed/sentiment1/400/300" alt="情感分布比例图" class="w-full h-auto rounded-lg shadow-md">
+                        <p class="font-semibold text-primary mt-2 text-center">情感分布比例图</p>
+                    </div>
+                    <div class="card-hover">
+                        <img src="https://picsum.photos/seed/sentiment2/400/300" alt="情感趋势变化图" class="w-full h-auto rounded-lg shadow-md">
+                        <p class="font-semibold text-primary mt-2 text-center">情感趋势变化图</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 视频区域2 -->
+    <section class="py-10 max-w-5xl mx-auto px-4 my-12">
+        <h2 class="text-2xl md:text-3xl font-bold text-primary mb-6 text-center">更多视频</h2>
+        <div class="relative rounded-xl overflow-hidden shadow-2xl">
+            <video id="video2" class="w-full h-auto" controls poster="https://picsum.photos/seed/video2/800/450">
+                <source src="https://samplelib.com/lib/preview/mp4/sample-10s.mp4" type="video/mp4">
+                您的浏览器不支持视频播放
+            </video>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="nav-gradient text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-lg">© 2024 女性获奖者发言. All rights reserved.</p>
+            <p class="mt-2">联系我们：contact@example.com</p>
+        </div>
+    </footer>
+
+    <!-- 背景音乐控制 -->
+    <div class="fixed bottom-6 right-6 bg-white/80 p-4 rounded-full shadow-lg cursor-pointer z-50 card-hover" id="audio-control">
+        <i class="fa fa-volume-up text-primary text-xl"></i>
+    </div>
+    <audio id="background-music" loop muted>
+        <source src="https://samplelib.com/lib/preview/mp3/sample-15s.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // 存储从Excel读取的数据
+        let speechData = [];
+        
+        // 从GitHub读取Excel文件
+        const readExcelFromGitHub = async () => {
+            try {
+                // 使用您的实际数据路径
+                const githubRawUrl = 'https://raw.githubusercontent.com/csh5177/cshnew/5f779cec83c42c03c8aed54578e6fdeea9da032d/data.xlsx';
+                
+                // 显示加载指示器
+                document.getElementById('loading-indicator').classList.remove('hidden');
+                
+                const response = await fetch(githubRawUrl);
+                if (!response.ok) {
+                    throw new Error(`无法加载文件: ${response.statusText}`);
+                }
+                
+                const arrayBuffer = await response.arrayBuffer();
+                const workbook = XLSX.read(arrayBuffer, { type: 'array' });
+                const sheetName = workbook.SheetNames[0];
+                speechData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+                
+                // 填充姓名选择框
+                fillNameSelect();
+                
+                // 隐藏加载指示器
+                document.getElementById('loading-indicator').classList.add('hidden');
+                
+                console.log('数据加载成功:', speechData);
+            } catch (error) {
+                console.error('读取Excel文件时出错:', error);
+                
+                // 隐藏加载指示器
+                document.getElementById('loading-indicator').classList.add('hidden');
+                
+                // 显示错误信息
+                document.getElementById('speech-text').classList.remove('hidden');
+                document.getElementById('speech-content').innerHTML = `
+                    <div class="text-center py-8 text-red-600">
+                        <i class="fa fa-exclamation-triangle text-4xl mb-4"></i>
+                        <p>无法加载演讲稿数据，请检查网络连接或稍后重试。</p>
+                    </div>
+                `;
+                
+                // 使用模拟数据以便继续开发
+                useMockData();
+            }
+        };
+        
+        // 使用模拟数据（用于开发环境或数据加载失败时）
+        const useMockData = () => {
+            speechData = [
+                {
+                    "姓名": "热依扎",
+                    "中文演讲稿": "尊敬的各位来宾，女士们，先生们：\n\n大家好！今天，我站在这里，心中充满了感激和激动。作为一名演员，能够获得这个奖项，是对我多年努力的肯定。\n\n我要感谢我的家人，是你们的支持和鼓励让我能够坚持追求自己的梦想。我还要感谢我的团队，没有你们的帮助，我不可能完成这些作品。\n\n最重要的是，我要感谢所有观众的喜爱和支持。是你们的掌声和鼓励，让我有动力继续前行。\n\n未来，我会继续努力，为大家带来更多优秀的作品。谢谢大家！",
+                    "英文演讲稿": "Distinguished guests, ladies and gentlemen:\n\nGood evening! I stand here today filled with gratitude and excitement. As an actress, receiving this award is a recognition of my years of hard work.\n\nI would like to thank my family. Your support and encouragement have allowed me to pursue my dreams. I also want to thank my team. Without your help, I couldn't have completed these works.\n\nMost importantly, I want to thank all the audience for your love and support. It is your applause and encouragement that give me the motivation to move forward.\n\nIn the future, I will continue to work hard to bring you more excellent works. Thank you all!"
+                },
+                {
+                    "姓名": "张小斐",
+                    "中文演讲稿": "感谢大家给我这个机会站在这里。获得这个奖项对我来说意义非凡。\n\n我要特别感谢我的导演，是您的信任和指导，让我有机会诠释这么精彩的角色。\n\n同时，我也要感谢我的搭档们，和你们一起工作是我的荣幸。我们共同努力，才创造出了这样优秀的作品。\n\n最后，我要感谢我的粉丝们。你们的支持是我前进的动力。我会继续努力，不辜负你们的期望。\n\n谢谢大家！",
+                    "英文演讲稿": "Thank you all for giving me this opportunity to stand here. Winning this award means a lot to me.\n\nI would like to especially thank my director. Your trust and guidance have allowed me to interpret such wonderful characters.\n\nI also want to thank my co-stars. It's my honor to work with you. Through our joint efforts, we created such excellent works.\n\nFinally, I want to thank my fans. Your support is my motivation to move forward. I will continue to work hard to live up to your expectations.\n\nThank you all!"
+                }
+            ];
+            
+            // 填充姓名选择框
+            fillNameSelect();
+        };
+        
+        // 填充姓名选择框
+        const fillNameSelect = () => {
+            const nameSelect = document.getElementById('name-select');
+            
+            // 清空已有的选项（除了第一个）
+            while (nameSelect.options.length > 1) {
+                nameSelect.remove(1);
+            }
+            
+            // 添加所有姓名选项
+            const names = [...new Set(speechData.map(item => item.姓名))];
+            names.forEach(name => {
+                const option = document.createElement('option');
+                option.value = name;
+                option.textContent = name;
+                nameSelect.appendChild(option);
+            });
+            
+            // 添加选择事件监听
+            nameSelect.addEventListener('change', handleNameSelection);
+        };
+        
+        // 处理姓名选择
+        const handleNameSelection = (e) => {
+            const selectedName = e.target.value;
+            
+            if (selectedName) {
+                // 显示演讲稿
+                showSpeech(selectedName);
+            } else {
+                // 隐藏演讲稿显示区域
+                document.getElementById('speech-text').classList.add('hidden');
+            }
+        };
+        
+        // 显示演讲稿
+        const showSpeech = (name) => {
+            const speechText = document.getElementById('speech-text');
+            const speechTitle = document.getElementById('speech-title');
+            const speechContent = document.getElementById('speech-content');
+            
+            // 显示演讲稿区域
+            speechText.classList.remove('hidden');
+            
+            // 显示加载指示器
+            speechTitle.textContent = '';
+            speechContent.innerHTML = `
+                <div class="text-center py-8">
+                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+                    <p class="mt-2 text-primary">正在加载演讲稿...</p>
+                </div>
+            `;
+            
+            // 查找对应演讲稿
+            const selectedSpeech = speechData.find(item => item.姓名 === name);
+            
+            if (selectedSpeech) {
+                // 设置标题
+                speechTitle.textContent = `${name} 的获奖感言`;
+                
+                // 处理演讲稿内容
+                const content = selectedSpeech['中文演讲稿'] || '未找到演讲稿内容';
+                
+                // 显示演讲稿内容，保留换行并添加段落样式
+                speechContent.innerHTML = content
+                    .split('\n\n')
+                    .map(paragraph => `<p class="mb-4">${paragraph}</p>`)
+                    .join('');
+            } else {
+                // 未找到演讲稿
+                speechTitle.textContent = `${name} 的获奖感言`;
+                speechContent.innerHTML = `
+                    <div class="text-center py-8 text-gray-500">
+                        <i class="fa fa-file-text-o text-4xl mb-4"></i>
+                        <p>未找到该获奖者的演讲稿内容</p>
+                    </div>
+                `;
+            }
+            
+            // 平滑滚动到演讲稿区域
+            speechText.scrollIntoView({ behavior: 'smooth' });
+        };
+        
+        // 页面加载时执行
+        window.onload = () => {
+            // 读取Excel数据
+            readExcelFromGitHub();
+            
+            // 音频控制
+            const audioControl = document.getElementById('audio-control');
+            const backgroundMusic = document.getElementById('background-music');
+            
+            audioControl.addEventListener('click', () => {
+                if (backgroundMusic.muted) {
+                    backgroundMusic.muted = false;
+                    backgroundMusic.play().catch(e => console.log('无法自动播放音频:', e));
+                    audioControl.innerHTML = '<i class="fa fa-volume-up text-primary text-xl"></i>';
+                } else {
+                    backgroundMusic.muted = true;
+                    audioControl.innerHTML = '<i class="fa fa-volume-off text-primary text-xl"></i>';
+                }
+            });
+            
+            // 移动端菜单
+            const menuButton = document.querySelector('nav button');
+            const navList = document.querySelector('nav ul');
+            
+            menuButton.addEventListener('click', () => {
+                navList.classList.toggle('hidden');
+                navList.classList.toggle('flex');
+                navList.classList.toggle('absolute');
+                navList.classList.toggle('top-16');
+                navList.classList.toggle('left-0');
+                navList.classList.toggle('w-full');
+                navList.classList.toggle('bg-primary/95');
+                navList.classList.toggle('py-4');
+                navList.classList.toggle('px-6');
+                navList.classList.toggle('z-50');
+            });
+            
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 关闭移动端菜单
+                    if (navList.classList.contains('absolute')) {
+                        navList.classList.add('hidden');
+                        navList.classList.remove('flex', 'absolute', 'top-16', 'left-0', 'w-full', 'bg-primary/95', 'py-4', 'px-6', 'z-50');
+                    }
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        };
+    </script>
+</body>
+
+</html>
