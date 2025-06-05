@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>致我最爱的牛同悦</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF4B91',
+                        secondary: '#FFD1DC',
+                        accent: '#FF69B4',
+                        dark: '#8A3351',
+                        light: '#FFF0F5',
+                    },
+                    fontFamily: {
+                        romantic: ['Dancing Script', 'cursive'],
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            }
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                color: transparent;
+            }
+            .animate-float {
+                animation: float 3s ease-in-out infinite;
+            }
+            .animate-float-delay-1 {
+                animation: float 3s ease-in-out 0.5s infinite;
+            }
+            .animate-float-delay-2 {
+                animation: float 3s ease-in-out 1s infinite;
+            }
+            .animate-appear {
+                animation: appear 0.8s ease-out forwards;
+            }
+            .animate-fade-in {
+                animation: fadeIn 1.5s ease-out forwards;
+            }
+            .bg-heart-pattern {
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23FF4B91' fill-opacity='0.2'%3E%3Cpath d='M0 20 c5-5 10-8 15-8 s10 3 15 8 c5 5 8 10 8 15 c0 5-3 10-8 15 c-5 5-10 8-15 8 s-10-3-15-8 c-5-5-8-10-8-15 c0-5 3-10 8-15 Z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes appear {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-light bg-heart-pattern min-h-screen overflow-x-hidden">
+    <!-- 雪花效果容器 -->
+    <div id="snow-container" class="fixed top-0 left-0 w-full h-full pointer-events-none z-10"></div>
+
+    <!-- 主容器 -->
+    <main class="container mx-auto px-4 py-12 md:py-20 relative z-20">
+        <!-- 标题部分 -->
+        <section class="text-center mb-20 animate-fade-in">
+            <h1 class="text-[clamp(2.5rem,8vw,5rem)] font-romantic font-bold text-gradient bg-gradient-to-r from-primary to-dark mb-4 text-shadow">
+                致我最爱的牛同悦
+            </h1>
+            <p class="text-[clamp(1rem,3vw,1.5rem)] text-dark/80 max-w-2xl mx-auto">
+                从博物馆相遇的那一刻起，我的世界便有了不一样的色彩
+            </p>
+        </section>
+
+        <!-- 时间轴部分 -->
+        <section class="max-w-4xl mx-auto mb-24">
+            <div class="relative">
+                <!-- 连接线 -->
+                <div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-1 bg-primary/30 transform md:-translate-x-1/2"></div>
+
+                <!-- 时间点1 -->
+                <div class="mb-12 relative animate-appear" style="animation-delay: 0.2s">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="hidden md:block w-1/2 md:pr-8 md:text-right">
+                            <h3 class="text-xl font-semibold text-dark">第一次相遇</h3>
+                            <p class="text-dark/70">命运让我们在茫茫人海中相识</p>
+                        </div>
+                        <div class="z-10 bg-primary w-6 h-6 rounded-full border-4 border-light shadow-md transform md:-translate-x-1/2"></div>
+                        <div class="w-full md:w-1/2 md:pl-8 mt-4 md:mt-0">
+                            <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-all duration-300">
+                                <p class="text-dark/80 italic">"那天，我永远记得，你通过了我的好友申请，从此，我的生活便多了一份期待"</p>
+                                <div class="text-right mt-2 text-primary/70">2024年4月12日</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 时间点2 -->
+                <div class="mb-12 relative animate-appear" style="animation-delay: 0.4s">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="hidden md:block w-1/2 md:pr-8 md:text-right">
+                            <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-all duration-300">
+                                <p class="text-dark/80 italic">"和你聊天的每一刻都让我感到快乐，你的笑容、你的声音，都深深地印在了我的心里"</p>
+                                <div class="text-right mt-2 text-primary/70">相识后的每一天</div>
+                            </div>
+                        </div>
+                        <div class="z-10 bg-primary w-6 h-6 rounded-full border-4 border-light shadow-md transform md:-translate-x-1/2"></div>
+                        <div class="w-full md:w-1/2 md:pl-8 mt-4 md:mt-0">
+                            <h3 class="text-xl font-semibold text-dark">友谊的开始</h3>
+                            <p class="text-dark/70">从聊天到分享生活，我发现自己越来越珍惜你这个朋友</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 时间点3 -->
+                <div class="relative animate-appear" style="animation-delay: 0.6s">
+                    <div class="flex flex-col md:flex-row items-center">
+                        <div class="hidden md:block w-1/2 md:pr-8 md:text-right">
+                            <h3 class="text-xl font-semibold text-dark">心意的表达</h3>
+                            <p class="text-dark/70">今天，我终于鼓起勇气，向你表达我的心意</p>
+                        </div>
+                        <div class="z-10 bg-primary w-6 h-6 rounded-full border-4 border-light shadow-md transform md:-translate-x-1/2"></div>
+                        <div class="w-full md:w-1/2 md:pl-8 mt-4 md:mt-0">
+                            <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-all duration-300">
+                                <p class="text-dark/80">"牛同悦，我很珍惜我们之间的友谊，希望我们能一直是好朋友，相互支持，共同成长。"</p>
+                                <div class="text-right mt-2 text-primary/70">今天</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 告白信部分 -->
+        <section class="max-w-3xl mx-auto mb-24 animate-appear" style="animation-delay: 0.8s">
+            <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 relative overflow-hidden">
+                <!-- 装饰元素 -->
+                <div class="absolute -top-10 -right-10 w-32 h-32 bg-secondary/30 rounded-full"></div>
+                <div class="absolute -bottom-16 -left-16 w-40 h-40 bg-secondary/20 rounded-full"></div>
+
+                <div class="relative z-10">
+                    <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-romantic text-primary mb-6 text-center">给牛同悦的一封信</h2>
+                    <div class="space-y-4 text-dark/80 leading-relaxed">
+                        <p>亲爱的牛同悦：</p>
+                        <p>今天是我们相识后的第420天，我想对你说一声谢谢。谢谢你出现在我的生命里，让我感受到了从未有过的温暖和幸福。</p>
+                        <p>从我们第一次加微信的那一刻起，我就知道你是一个特别的人。你的善良、你的聪明、你的幽默，都让我深深欣赏。每次和你聊天，我都会忘记时间的流逝，仿佛整个世界只剩下我们两个人。</p>
+                        <p>我知道友情不能用时间来衡量，但我真的很珍惜我们在一起的每一刻。我希望能和你一起看日出日落，一起经历生活中的喜怒哀乐，一起创造属于我们的美好回忆。</p>
+                        <p>牛同悦，我很珍惜我们之间的友谊，希望我们能一直是好朋友。无论未来发生什么，我都希望我们能相互支持，共同成长。</p>
+                        <p>最后，我想问你一个问题：</p>
+                        <p class="text-center text-xl font-semibold mt-8">你愿意一直当我的好朋友吗？</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 选项部分 -->
+        <section class="text-center mb-16 animate-appear" style="animation-delay: 1s">
+            <div class="flex flex-col sm:flex-row justify-center gap-6 max-w-lg mx-auto">
+                <button id="yesBtn" class="bg-primary hover:bg-dark text-white font-bold py-4 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-primary/50">
+                    <i class="fa fa-heart mr-2"></i> 愿意
+                </button>
+                <button id="noBtn" class="bg-white hover:bg-gray-100 text-dark font-bold py-4 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-gray-200">
+                    <i class="fa fa-times mr-2"></i> 再考虑
+                </button>
+            </div>
+        </section>
+
+        <!-- 装饰元素 -->
+        <div class="flex justify-center gap-8 mb-12">
+            <div class="text-primary text-4xl animate-float"><i class="fa fa-heart"></i></div>
+            <div class="text-primary text-3xl animate-float-delay-1"><i class="fa fa-star"></i></div>
+            <div class="text-primary text-4xl animate-float-delay-2"><i class="fa fa-heart"></i></div>
+            <div class="text-primary text-3xl animate-float"><i class="fa fa-star"></i></div>
+            <div class="text-primary text-4xl animate-float-delay-1"><i class="fa fa-heart"></i></div>
+        </div>
+    </main>
+
+    <!-- 结果弹窗 -->
+    <div id="resultModal" class="fixed inset-0 flex items-center justify-center z-50 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-500">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4 transform scale-95 transition-transform duration-500">
+            <div id="resultContent" class="text-center">
+                <!-- 内容将通过JS动态填充 -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 生成雪花效果
+        function createSnow() {
+            const container = document.getElementById('snow-container');
+            const numberOfSnowflakes = 100;
+            
+            for (let i = 0; i < numberOfSnowflakes; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.innerHTML = '<i class="fa fa-heart text-primary/50"></i>';
+                snowflake.className = 'absolute';
+                snowflake.style.left = Math.random() * 100 + 'vw';
+                snowflake.style.top = -Math.random() * 100 + 'vh';
+                snowflake.style.opacity = Math.random() * 0.7 + 0.3;
+                snowflake.style.fontSize = Math.random() * 15 + 10 + 'px';
+                snowflake.style.animation = `fall ${Math.random() * 10 + 10}s linear infinite`;
+                snowflake.style.transform = `rotate(${Math.random() * 360}deg)`;
+                container.appendChild(snowflake);
+            }
+        }
+
+        // 添加雪花下落动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                to {
+                    transform: translateY(100vh) rotate(720deg);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // 页面加载完成后创建雪花
+        window.addEventListener('DOMContentLoaded', createSnow);
+
+        // 按钮点击事件
+        document.getElementById('yesBtn').addEventListener('click', function() {
+            showResultModal(`
+                <div class="mb-6">
+                    <div class="inline-block p-4 rounded-full bg-secondary/30 mb-4">
+                        <i class="fa fa-heart text-primary text-5xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-dark mb-2">太好啦！</h3>
+                    <p class="text-dark/70">我们将永远是最好的朋友！</p>
+                </div>
+                <div class="space-y-3 text-left">
+                    <p class="text-dark/80">亲爱的牛同悦：</p>
+                    <p class="text-dark/80">很高兴你愿意成为我永远的好朋友！这对我来说意义非凡。</p>
+                    <p class="text-dark/80">让我们一起走过未来的每一天，分享快乐，共同成长。无论何时何地，我都会在你身边。</p>
+                    <p class="text-dark/80">愿我们的友谊长存，直到永远！</p>
+                </div>
+                <div class="mt-8">
+                    <button id="closeModal" class="bg-primary hover:bg-dark text-white font-bold py-3 px-6 rounded-full shadow transition-all duration-300">
+                        珍藏这份友谊
+                    </button>
+                </div>
+            `);
+        });
+
+        document.getElementById('noBtn').addEventListener('click', function() {
+            showResultModal(`
+                <div class="mb-6">
+                    <div class="inline-block p-4 rounded-full bg-gray-100 mb-4">
+                        <i class="fa fa-clock-o text-gray-500 text-5xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-dark mb-2">没关系</h3>
+                    <p class="text-dark/70">我们可以慢慢来</p>
+                </div>
+                <div class="space-y-3 text-left">
+                    <p class="text-dark/80">亲爱的牛同悦：</p>
+                    <p class="text-dark/80">我理解你可能需要更多时间来考虑我们的关系，这完全没问题。</p>
+                    <p class="text-dark/80">无论你做出什么决定，我都尊重你的选择。希望我们仍然可以保持联系，继续了解彼此。</p>
+                    <p class="text-dark/80">友谊是需要时间培养的，我愿意等待，直到你准备好。</p>
+                </div>
+                <div class="mt-8">
+                    <button id="closeModal" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full shadow transition-all duration-300">
+                        好的，再考虑
+                    </button>
+                </div>
+            `);
+        });
+
+        function showResultModal(content) {
+            const modal = document.getElementById('resultModal');
+            const resultContent = document.getElementById('resultContent');
+            
+            resultContent.innerHTML = content;
+            
+            // 显示模态框
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.remove('scale-95');
+            modal.querySelector('div').classList.add('scale-100');
+            
+            // 关闭模态框事件
+            document.getElementById('closeModal').addEventListener('click', function() {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                modal.querySelector('div').classList.remove('scale-100');
+                modal.querySelector('div').classList.add('scale-95');
+            });
+        }
+    </script>
+</body>
+</html>
