@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>给史若兰的一封情书</title>
+  <!-- Tailwind CSS v3 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- 配置Tailwind自定义颜色 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            love: {
+              primary: '#FF4B91',
+              secondary: '#FF9B9B',
+              accent: '#FFD1DA',
+              light: '#FFF0F3',
+              dark: '#E6396E'
+            }
+          },
+          fontFamily: {
+            love: ['Dancing Script', 'cursive', 'sans-serif'],
+            main: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- 自定义工具类 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .text-shadow {
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      .text-shadow-lg {
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+      }
+      .animate-float {
+        animation: float 3s ease-in-out infinite;
+      }
+      .animate-beat {
+        animation: beat 1.5s ease-in-out infinite;
+      }
+      .bg-heart-pattern {
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FF4B91' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      }
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    @keyframes beat {
+      0% { transform: scale(1); }
+      14% { transform: scale(1.2); }
+      28% { transform: scale(1); }
+      42% { transform: scale(1.2); }
+      70% { transform: scale(1); }
+    }
+  </style>
+  
+  <!-- 引入Google字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-love-light bg-heart-pattern min-h-screen flex flex-col">
+  <!-- 导航栏 -->
+  <nav class="bg-white/80 backdrop-blur-md fixed w-full z-50 transition-all duration-300 shadow-sm">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="#" class="text-love-primary font-love text-2xl font-bold">给若兰的情书</a>
+      <div class="hidden md:flex space-x-6">
+        <a href="#home" class="text-gray-700 hover:text-love-primary transition-colors duration-300">首页</a>
+        <a href="#memory" class="text-gray-700 hover:text-love-primary transition-colors duration-300">我们的回忆</a>
+        <a href="#confession" class="text-gray-700 hover:text-love-primary transition-colors duration-300">我的告白</a>
+        <a href="#promise" class="text-gray-700 hover:text-love-primary transition-colors duration-300">我的承诺</a>
+      </div>
+      <button class="md:hidden text-love-primary text-xl">
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主页部分 -->
+  <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-love-light to-love-accent opacity-80"></div>
+    
+    <!-- 装饰爱心 -->
+    <div class="absolute top-1/4 left-1/4 w-12 h-12 text-love-secondary animate-float" style="animation-delay: 0s;">
+      <i class="fa fa-heart text-2xl"></i>
+    </div>
+    <div class="absolute top-2/3 left-1/3 w-16 h-16 text-love-primary animate-float" style="animation-delay: 0.5s;">
+      <i class="fa fa-heart text-3xl"></i>
+    </div>
+    <div class="absolute top-1/2 right-1/4 w-10 h-10 text-love-dark animate-float" style="animation-delay: 1s;">
+      <i class="fa fa-heart text-xl"></i>
+    </div>
+    <div class="absolute bottom-1/4 right-1/3 w-14 h-14 text-love-secondary animate-float" style="animation-delay: 1.5s;">
+      <i class="fa fa-heart text-2xl"></i>
+    </div>
+    
+    <div class="container mx-auto px-4 z-10 text-center">
+      <h1 class="font-love text-[clamp(3rem,8vw,6rem)] font-bold text-love-primary mb-6 text-shadow-lg">
+        史若兰，<br>我爱你
+      </h1>
+      <p class="font-main text-[clamp(1.2rem,3vw,1.8rem)] text-gray-700 max-w-2xl mx-auto mb-10">
+        从遇见你的那一刻起，我的世界便有了不一样的色彩
+      </p>
+      <div class="w-16 h-16 mx-auto text-love-primary animate-beat">
+        <i class="fa fa-heart text-6xl"></i>
+      </div>
+      
+      <!-- 向下滚动按钮 -->
+      <a href="#memory" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-love-primary animate-bounce">
+        <i class="fa fa-angle-down text-3xl"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- 回忆部分 -->
+  <section id="memory" class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="font-love text-[clamp(2.5rem,5vw,4rem)] font-bold text-love-primary mb-16 text-center">
+        我们的回忆
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- 回忆卡片1 -->
+        <div class="bg-love-light rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+          <div class="h-60 bg-love-primary relative overflow-hidden">
+            <img src="https://picsum.photos/seed/firstmeeting/800/600" alt="我们的第一次相遇" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <h3 class="absolute bottom-4 left-4 text-white font-love text-2xl font-bold">第一次相遇</h3>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">那天，我看到了你，仿佛整个世界都安静了下来，只剩下心跳的声音。</p>
+            <div class="text-love-primary">
+              <i class="fa fa-calendar"></i> <span class="ml-2">2023年3月15日</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 回忆卡片2 -->
+        <div class="bg-love-light rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+          <div class="h-60 bg-love-primary relative overflow-hidden">
+            <img src="https://picsum.photos/seed/firstdate/800/600" alt="我们的第一次约会" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <h3 class="absolute bottom-4 left-4 text-white font-love text-2xl font-bold">第一次约会</h3>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">那是一个美好的夜晚，我们一起散步，聊天，我确定了你就是我想要共度一生的人。</p>
+            <div class="text-love-primary">
+              <i class="fa fa-calendar"></i> <span class="ml-2">2023年4月20日</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 回忆卡片3 -->
+        <div class="bg-love-light rounded-xl overflow-hidden shadow-lg transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+          <div class="h-60 bg-love-primary relative overflow-hidden">
+            <img src="https://picsum.photos/seed/specialmoment/800/600" alt="我们的特别时刻" class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <h3 class="absolute bottom-4 left-4 text-white font-love text-2xl font-bold">特别的时刻</h3>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-700 mb-4">那一天，我向你诉说了我的心意，而你的笑容，让我成为了世界上最幸福的人。</p>
+            <div class="text-love-primary">
+              <i class="fa fa-calendar"></i> <span class="ml-2">2023年5月28日</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 告白部分 -->
+  <section id="confession" class="py-20 bg-gradient-to-br from-love-primary/10 to-love-secondary/10">
+    <div class="container mx-auto px-4">
+      <h2 class="font-love text-[clamp(2.5rem,5vw,4rem)] font-bold text-love-primary mb-16 text-center">
+        我的告白
+      </h2>
+      
+      <div class="max-w-3xl mx-auto bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8 md:p-12 relative">
+        <!-- 装饰元素 -->
+        <div class="absolute -top-5 -left-5 w-10 h-10 text-love-primary">
+          <i class="fa fa-heart"></i>
+        </div>
+        <div class="absolute -top-3 -right-3 w-8 h-8 text-love-secondary">
+          <i class="fa fa-heart"></i>
+        </div>
+        <div class="absolute -bottom-4 -left-4 w-9 h-9 text-love-secondary">
+          <i class="fa fa-heart"></i>
+        </div>
+        <div class="absolute -bottom-5 -right-5 w-10 h-10 text-love-primary">
+          <i class="fa fa-heart"></i>
+        </div>
+        
+        <div class="relative z-10">
+          <p class="text-gray-700 text-lg mb-6 leading-relaxed">
+            若兰，当我试图用文字表达我对你的感情时，才发现语言是如此的匮乏。
+          </p>
+          <p class="text-gray-700 text-lg mb-6 leading-relaxed">
+            从见到你的第一眼起，我的心就被你俘虏了。你的笑容如阳光般温暖，你的眼睛如星辰般璀璨，你的声音如春风般轻柔。
+          </p>
+          <p class="text-gray-700 text-lg mb-6 leading-relaxed">
+            和你在一起的每一天都让我感到无比幸福，无论是一起看电影、散步，还是简单地坐在一起聊天。你的陪伴让一切变得美好。
+          </p>
+          <p class="text-gray-700 text-lg mb-8 leading-relaxed">
+            我爱你的善良，爱你的聪明，爱你的坚强，也爱你偶尔的小任性。我爱你全部的样子，因为那就是独一无二的你。
+          </p>
+          
+          <div class="text-center mt-10">
+            <h3 class="font-love text-3xl text-love-dark mb-2">史若兰</h3>
+            <p class="text-2xl font-bold text-love-primary">我喜欢你，<br>愿意做我的女朋友吗？</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 签名 -->
+      <div class="text-right mt-10 max-w-3xl mx-auto">
+        <p class="font-love text-2xl text-love-primary">永远爱你的人</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 承诺部分 -->
+  <section id="promise" class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="font-love text-[clamp(2.5rem,5vw,4rem)] font-bold text-love-primary mb-16 text-center">
+        我的承诺
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <!-- 承诺卡片1 -->
+        <div class="bg-love-accent/30 rounded-xl p-6 shadow-md transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+          <div class="flex items-start">
+            <div class="text-love-primary mr-4 mt-1">
+              <i class="fa fa-heart text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-800 mb-2">永远爱你</h3>
+              <p class="text-gray-600">我会用我的一生去爱你，珍惜你，保护你，无论顺境还是逆境。</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 承诺卡片2 -->
+        <div class="bg-love-accent/30 rounded-xl p-6 shadow-md transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+          <div class="flex items-start">
+            <div class="text-love-primary mr-4 mt-1">
+              <i class="fa fa-star text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-800 mb-2">尊重与支持</h3>
+              <p class="text-gray-600">我会尊重你的选择和决定，支持你的梦想和追求，与你一起成长。</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 承诺卡片3 -->
+        <div class="bg-love-accent/30 rounded-xl p-6 shadow-md transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+          <div class="flex items-start">
+            <div class="text-love-primary mr-4 mt-1">
+              <i class="fa fa-home text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-800 mb-2">共建未来</h3>
+              <p class="text-gray-600">我希望与你一起创造一个温暖的家，一起经历生活的点点滴滴，共同面对未来的挑战。</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 承诺卡片4 -->
+        <div class="bg-love-accent/30 rounded-xl p-6 shadow-md transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
+          <div class="flex items-start">
+            <div class="text-love-primary mr-4 mt-1">
+              <i class="fa fa-clock-o text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-gray-800 mb-2">珍惜每一刻</h3>
+              <p class="text-gray-600">我会珍惜与你在一起的每一刻，无论是平凡的日常还是特别的时刻，都将成为我最珍贵的回忆。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 互动部分 -->
+  <section class="py-20 bg-love-light">
+    <div class="container mx-auto px-4">
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="font-love text-[clamp(2rem,4vw,3rem)] font-bold text-love-primary mb-6">
+          若兰，你愿意吗？
+        </h2>
+        <p class="text-gray-700 mb-10 text-lg">
+          请点击下方按钮回答我
+        </p>
+        
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <button id="acceptBtn" class="bg-love-primary hover:bg-love-dark text-white font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+            <i class="fa fa-heart mr-2"></i> 我愿意
+          </button>
+          <button id="rejectBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+            <i class="fa fa-times mr-2"></i> 再考虑
+          </button>
+        </div>
+        
+        <!-- 结果显示区域 -->
+        <div id="result" class="mt-10 hidden">
+          <div id="acceptMessage" class="hidden">
+            <div class="bg-white rounded-xl p-6 shadow-lg">
+              <h3 class="font-love text-2xl text-love-primary mb-4">太开心了！</h3>
+              <p class="text-gray-700 mb-4">我会用我的一生去爱你，若兰！</p>
+              <div class="text-love-primary text-3xl">
+                <i class="fa fa-heart animate-beat"></i>
+              </div>
+            </div>
+          </div>
+          <div id="rejectMessage" class="hidden">
+            <div class="bg-white rounded-xl p-6 shadow-lg">
+              <h3 class="font-love text-2xl text-gray-700 mb-4">没关系</h3>
+              <p class="text-gray-700 mb-4">我会一直等你，直到你愿意接受我的心意。</p>
+              <div class="text-gray-500 text-3xl">
+                <i class="fa fa-clock-o"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="bg-love-primary text-white py-8">
+    <div class="container mx-auto px-4 text-center">
+      <p class="font-love text-2xl mb-4">永远爱你的人</p>
+      <p class="mb-2">用❤️制作</p>
+      <p class="text-sm text-white/80">2023年6月</p>
+    </div>
+  </footer>
+
+  <!-- 漂浮爱心效果 -->
+  <div id="heartContainer" class="fixed inset-0 pointer-events-none z-50"></div>
+
+  <!-- JavaScript -->
+  <script>
+    // 导航栏滚动效果
+    window.addEventListener('scroll', function() {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 50) {
+        nav.classList.add('py-2', 'shadow-md');
+        nav.classList.remove('py-3', 'shadow-sm');
+      } else {
+        nav.classList.add('py-3', 'shadow-sm');
+        nav.classList.remove('py-2', 'shadow-md');
+      }
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // 互动按钮效果
+    const acceptBtn = document.getElementById('acceptBtn');
+    const rejectBtn = document.getElementById('rejectBtn');
+    const result = document.getElementById('result');
+    const acceptMessage = document.getElementById('acceptMessage');
+    const rejectMessage = document.getElementById('rejectMessage');
+    
+    acceptBtn.addEventListener('click', function() {
+      result.classList.remove('hidden');
+      acceptMessage.classList.remove('hidden');
+      createHearts(20);
+    });
+    
+    rejectBtn.addEventListener('click', function() {
+      result.classList.remove('hidden');
+      rejectMessage.classList.remove('hidden');
+    });
+    
+    // 创建漂浮爱心
+    function createHearts(count) {
+      const container = document.getElementById('heartContainer');
+      
+      for (let i = 0; i < count; i++) {
+        const heart = document.createElement('div');
+        const size = Math.random() * 30 + 10;
+        const left = Math.random() * 100;
+        const delay = Math.random() * 5;
+        const duration = Math.random() * 10 + 10;
+        
+        heart.innerHTML = '<i class="fa fa-heart"></i>';
+        heart.className = 'absolute text-love-primary';
+        heart.style.fontSize = `${size}px`;
+        heart.style.left = `${left}%`;
+        heart.style.bottom = '-50px';
+        heart.style.opacity = '0';
+        heart.style.transition = `all ${duration}s ease-in-out`;
+        heart.style.animation = `float ${Math.random() * 3 + 2}s ease-in-out infinite`;
+        heart.style.animationDelay = `${delay}s`;
+        heart.style.transform = 'translateY(0)';
+        
+        container.appendChild(heart);
+        
+        // 触发动画
+        setTimeout(() => {
+          heart.style.bottom = '100%';
+          heart.style.opacity = '1';
+          heart.style.transform = 'translateY(0) rotate(360deg)';
+        }, 10);
+        
+        // 移除爱心
+        setTimeout(() => {
+          heart.remove();
+        }, duration * 1000);
+      }
+    }
+  </script>
+</body>
+</html>
+    
