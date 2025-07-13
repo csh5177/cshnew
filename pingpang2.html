@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>热搜分析之国乒</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- 配置Tailwind -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3b82f6',
+            secondary: '#10b981',
+            accent: '#8b5cf6',
+            neutral: '#1f2937',
+            'neutral-light': '#f3f4f6',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['Noto Serif SC', 'serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+      .scroll-smooth {
+        scroll-behavior: smooth;
+      }
+      .gradient-bg {
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans scroll-smooth">
+  <!-- 导航栏 -->
+  <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/90 backdrop-blur-sm shadow-sm">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="#hero" class="text-2xl font-bold text-primary flex items-center">
+        <i class="fa fa-line-chart mr-2"></i>
+        <span>热搜分析之国乒</span>
+      </a>
+      <nav class="hidden md:flex space-x-8">
+        <a href="#hot-news" class="text-neutral hover:text-primary transition-colors">热搜一览</a>
+        <a href="#poetry" class="text-neutral hover:text-primary transition-colors">热搜作诗</a>
+        <a href="#word-cloud" class="text-neutral hover:text-primary transition-colors">词频词云分析</a>
+        <a href="#sentiment" class="text-neutral hover:text-primary transition-colors">情感分析</a>
+        <a href="#visualization" class="text-neutral hover:text-primary transition-colors">其他可视化分析</a>
+        <a href="#liblib" class="text-neutral hover:text-primary transition-colors">liblib生图</a>
+        <a href="#video" class="text-neutral hover:text-primary transition-colors">AI视频+配乐</a>
+      </nav>
+      <button id="mobile-menu-button" class="md:hidden text-neutral text-xl">
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+    <!-- 移动端菜单 -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg absolute w-full">
+      <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+        <a href="#hot-news" class="text-neutral hover:text-primary transition-colors py-2 border-b border-gray-100">热搜一览</a>
+        <a href="#poetry" class="text-neutral hover:text-primary transition-colors py-2 border-b border-gray-100">热搜作诗</a>
+        <a href="#word-cloud" class="text-neutral hover:text-primary transition-colors py-2 border-b border-gray-100">词频词云分析</a>
+        <a href="#sentiment" class="text-neutral hover:text-primary transition-colors py-2 border-b border-gray-100">情感分析</a>
+        <a href="#visualization" class="text-neutral hover:text-primary transition-colors py-2 border-b border-gray-100">其他可视化分析</a>
+        <a href="#liblib" class="text-neutral hover:text-primary transition-colors py-2 border-b border-gray-100">liblib生图</a>
+        <a href="#video" class="text-neutral hover:text-primary transition-colors py-2">AI视频+配乐</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 英雄区 -->
+  <section id="hero" class="pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br from-primary/5 to-accent/5">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-bold text-neutral mb-6 leading-tight text-shadow">
+        热搜分析之国乒
+      </h1>
+      <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-10">
+        每日热点尽在掌握，深度剖析国乒话题热度与网民情感
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="#hot-news" class="px-6 py-3 bg-primary text-white rounded-lg shadow-lg hover:bg-primary/90 transition-all transform hover:-translate-y-1">
+          <i class="fa fa-fire mr-2"></i>查看今日热搜
+        </a>
+        <a href="#word-cloud" class="px-6 py-3 bg-white text-primary border border-primary rounded-lg shadow hover:bg-gray-50 transition-all transform hover:-translate-y-1">
+          <i class="fa fa-bar-chart mr-2"></i>数据分析
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关于我们 -->
+  <section id="about" class="py-12 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <div class="bg-primary/5 rounded-xl p-8 shadow-sm">
+        <h2 class="text-2xl font-bold text-neutral mb-4">关于我们</h2>
+        <p class="text-gray-700 leading-relaxed">
+          本网站致力于对每日热搜中的最热话题进行详细的数据分析，根据热搜，今日最热的话题为国乒比赛，所以网页对国乒相关话题进行了数据分析和可视化呈现，并运用AI进行诗词、图片、音乐、视频的生成，也在本网页进行展示。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 热搜一览 -->
+  <section id="hot-news" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-neutral mb-10 text-center">
+        <i class="fa fa-list-alt mr-2 text-primary"></i>热搜一览
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 热搜卡片 -->
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <div class="p-6">
+            <div class="flex items-center mb-4">
+              <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold mr-3">1</span>
+              <h3 class="font-semibold text-lg">总书记深情寄望电影工作者</h3>
+            </div>
+            <div class="flex items-center text-sm text-gray-500">
+              <span class="bg-primary/10 text-primary px-2 py-1 rounded-full text-xs">时政</span>
+              <span class="ml-auto">热度指数: 98</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <div class="p-6">
+            <div class="flex items-center mb-4">
+              <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold mr-3">2</span>
+              <h3 class="font-semibold text-lg">律师分析女大学生出轨外国人被开除</h3>
+            </div>
+            <div class="flex items-center text-sm text-gray-500">
+              <span class="bg-purple-100 text-purple-600 px-2 py-1 rounded-full text-xs">社会</span>
+              <span class="ml-auto">热度指数: 95</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <div class="p-6">
+            <div class="flex items-center mb-4">
+              <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold mr-3">3</span>
+              <h3 class="font-semibold text-lg">越来越多空姐不用穿高跟鞋</h3>
+            </div>
+            <div class="flex items-center text-sm text-gray-500">
+              <span class="bg-pink-100 text-pink-600 px-2 py-1 rounded-full text-xs">职场</span>
+              <span class="ml-auto">热度指数: 92</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <div class="p-6">
+            <div class="flex items-center mb-4">
+              <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold mr-3">4</span>
+              <h3 class="font-semibold text-lg">气温预报图肉眼可见变热了</h3>
+            </div>
+            <div class="flex items-center text-sm text-gray-500">
+              <span class="bg-red-100 text-red-600 px-2 py-1 rounded-full text-xs">天气</span>
+              <span class="ml-auto">热度指数: 90</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <div class="p-6">
+            <div class="flex items-center mb-4">
+              <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold mr-3">5</span>
+              <h3 class="font-semibold text-lg">孙颖莎王曼昱无缘女双冠军</h3>
+            </div>
+            <div class="flex items-center text-sm text-gray-500">
+              <span class="bg-green-100 text-green-600 px-2 py-1 rounded-full text-xs">体育</span>
+              <span class="ml-auto">热度指数: 88</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <div class="p-6">
+            <div class="flex items-center mb-4">
+              <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold mr-3">6</span>
+              <h3 class="font-semibold text-lg">港大男生用AI制作700多张同学不雅照</h3>
+            </div>
+            <div class="flex items-center text-sm text-gray-500">
+              <span class="bg-red-100 text-red-600 px-2 py-1 rounded-full text-xs">教育</span>
+              <span class="ml-auto">热度指数: 85</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <div class="p-6">
+            <div class="flex items-center mb-4">
+              <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold mr-3">7</span>
+              <h3 class="font-semibold text-lg">国足对阵日本现场观众仅1661人</h3>
+            </div>
+            <div class="flex items-center text-sm text-gray-500">
+              <span class="bg-green-100 text-green-600 px-2 py-1 rounded-full text-xs">体育</span>
+              <span class="ml-auto">热度指数: 82</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <div class="p-6">
+            <div class="flex items-center mb-4">
+              <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold mr-3">8</span>
+              <h3 class="font-semibold text-lg">蔡国庆点评19岁选手怼了4分钟</h3>
+            </div>
+            <div class="flex items-center text-sm text-gray-500">
+              <span class="bg-yellow-100 text-yellow-600 px-2 py-1 rounded-full text-xs">娱乐</span>
+              <span class="ml-auto">热度指数: 80</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <div class="p-6">
+            <div class="flex items-center mb-4">
+              <span class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold mr-3">9</span>
+              <h3 class="font-semibold text-lg">奶茶店忙到有啥给啥 订单撒满地</h3>
+            </div>
+            <div class="flex items-center text-sm text-gray-500">
+              <span class="bg-purple-100 text-purple-600 px-2 py-1 rounded-full text-xs">生活</span>
+              <span class="ml-auto">热度指数: 78</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 更多热搜 -->
+      <div id="more-hot-news" class="hidden mt-8 bg-white rounded-xl shadow-md p-6">
+        <h3 class="text-xl font-semibold text-neutral mb-4">全部热搜</h3>
+        <div class="space-y-3 max-h-96 overflow-y-auto pr-2">
+          <p><span class="font-bold text-primary">10.</span> 杨少华女儿怒怼：问心无愧</p>
+          <p><span class="font-bold text-primary">11.</span> 《扫毒风暴》首播口碑</p>
+          <p><span class="font-bold text-primary">12.</span> 八旬老人往车前放死鸡碰瓷？误会</p>
+          <p><span class="font-bold text-primary">13.</span> 被骗至缅甸失联的高考生行程曝光</p>
+          <p><span class="font-bold text-primary">14.</span> 印度外长将访华 要谈什么</p>
+          <p><span class="font-bold text-primary">15.</span> 俄罗斯考虑放弃唯一航母有啥隐情</p>
+          <p><span class="font-bold text-primary">16.</span> #外卖大战最大的受害者出现了#</p>
+          <p><span class="font-bold text-primary">17.</span> 周深回应录制《奔跑吧》遭拖拽</p>
+          <p><span class="font-bold text-primary">18.</span> 曹格17岁儿子晒照官宣恋情</p>
+          <p><span class="font-bold text-primary">19.</span> 王楚钦张本智和男单争冠</p>
+          <p><span class="font-bold text-primary">20.</span> 王楚钦4-3勒布伦晋级男单决赛</p>
+          <p><span class="font-bold text-primary">21.</span> 林诗栋3比4张本智和无缘男单决赛</p>
+          <p><span class="font-bold text-primary">22.</span> 中国女排逆转德国获三连胜</p>
+          <p><span class="font-bold text-primary">23.</span> 男孩尿女子衣服上家长还口出恶言</p>
+          <p><span class="font-bold text-primary">24.</span> 游客在洪崖洞遭拉拽拍照 重庆通报</p>
+          <p><span class="font-bold text-primary">25.</span> #奶茶店人人人人外卖小哥被吓退#</p>
+          <p><span class="font-bold text-primary">26.</span> 那英音乐节连麦花少团</p>
+          <p><span class="font-bold text-primary">27.</span> 陈熠4比3蒯曼晋级决赛</p>
+          <p><span class="font-bold text-primary">28.</span> 调查组应调查天水为何无法取信于民</p>
+          <p><span class="font-bold text-primary">29.</span> 中方回应“中国军机异常接近日机”</p>
+          <p><span class="font-bold text-primary">30.</span> 大同大学回应拟解聘旷工教师</p>
+          <p><span class="font-bold text-primary">31.</span> 小沈阳女儿机场被偶遇 超像妈妈</p>
+          <p><span class="font-bold text-primary">32.</span> 山东一地凌晨数十人蒙眼列队湖边走</p>
+          <p><span class="font-bold text-primary">33.</span> 马克龙：反对美国向欧盟征收30%关税</p>
+          <p><span class="font-bold text-primary">34.</span> 庞麦郎演唱会来了约400名听众</p>
+          <p><span class="font-bold text-primary">35.</span> 《超人》首映 打工人能捅多大篓子</p>
+          <p><span class="font-bold text-primary">36.</span> 王楚钦回应晋级男单决赛</p>
+          <p><span class="font-bold text-primary">37.</span> 霍启刚郭晶晶到贵州调研</p>
+          <p><span class="font-bold text-primary">38.</span> 美公民在约旦河西岸被犹太定居者打死</p>
+          <p><span class="font-bold text-primary">39.</span> 金正恩游艇上会见拉夫罗夫 意味深长</p>
+          <p><span class="font-bold text-primary">40.</span> 张本智和回应决赛对阵王楚钦</p>
+          <p><span class="font-bold text-primary">41.</span> 大同大学10人将被解聘注销事业编制</p>
+          <p><span class="font-bold text-primary">42.</span> 侃爷上海演唱会嫌雨太大提前退场</p>
+          <p><span class="font-bold text-primary">43.</span> 疑似跑男工作人员内涵周深</p>
+          <p><span class="font-bold text-primary">44.</span> 王艺迪蒯曼回应女双夺冠</p>
+          <p><span class="font-bold text-primary">45.</span> 德官员：7月底将向乌交付数百枚导弹</p>
+          <p><span class="font-bold text-primary">46.</span> 王楚钦获胜后将球打给观众</p>
+          <p><span class="font-bold text-primary">47.</span> 57岁周涛现身话剧院引轰动</p>
+          <p><span class="font-bold text-primary">48.</span> 这么近那么美 为啥是河北</p>
+          <p><span class="font-bold text-primary">49.</span> 向佐回应穿金属抹胸争议</p>
+          <p><span class="font-bold text-primary">50.</span> 外卖大战有骑手一天赚1000多元</p>
+          <p><span class="font-bold text-primary">51.</span> 误删微信聊天记录可以撤销了</p>
+        </div>
+      </div>
+      
+      <div class="mt-8 text-center">
+        <button id="load-more" class="px-6 py-3 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-all">
+          查看更多 <i class="fa fa-angle-down ml-1"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 热搜作诗 -->
+  <section id="poetry" class="py-16 bg-neutral-light">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-neutral mb-10 text-center">
+        <i class="fa fa-pencil-square-o mr-2 text-primary"></i>热搜作诗
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- 古体诗 -->
+        <div class="bg-white rounded-xl shadow-md p-8 card-hover">
+          <h3 class="text-2xl font-bold text-neutral mb-6 flex items-center">
+            <i class="fa fa-book text-primary mr-2"></i>古体诗
+          </h3>
+          <p class="text-lg leading-relaxed text-gray-700 font-serif">
+            银幕承嘱托，影人笔含诚<br>
+            女大故事悬，法眼辨浊清<br>
+            云端鞋声歇，平安载一程<br>
+            气温红线涌，草木记炎蒸<br>
+            球台少年勇，七局决输赢<br>
+            女排逆转势，三胜破敌营<br>
+            缅甸迷雾锁，考生足迹明<br>
+            洪崖洞影乱，通报守规绳<br>
+            奶茶单铺地，小哥踏暑行<br>
+            老叟车前误，善意胜虚惊<br>
+            西岸枪声裂，中东刻伤痕<br>
+            马克龙声起，关税壁垒横<br>
+            麦郎歌台下，四百共聆听<br>
+            周深遭拖拽，体面岂轻扔<br>
+            航母烟迟疑，取舍费权衡<br>
+            外卖战正酣，得失逐阴晴<br>
+            微信键可撤，光阴补碎影<br>
+            热搜流转处，皆是世间情
+          </p>
+        </div>
+        
+        <!-- 现代诗 -->
+        <div class="bg-white rounded-xl shadow-md p-8 card-hover">
+          <h3 class="text-2xl font-bold text-neutral mb-6 flex items-center">
+            <i class="fa fa-file-text-o text-primary mr-2"></i>现代诗
+          </h3>
+          <p class="text-lg leading-relaxed text-gray-700">
+            银幕接住嘱托的重量<br>
+            电影人的笔，蘸着赤诚书写<br>
+            云端的高跟鞋声渐远<br>
+            平底鞋踩出更稳的航线<br>
+            球台映着少年的锋芒<br>
+            七局鏖战，汗水浇开胜负<br>
+            洪崖洞的灯火乱了分寸<br>
+            通报里，规矩在慢慢归位<br>
+            外卖车碾过满地订单<br>
+            盛夏的风，卷着得失的碎片<br>
+            微信的撤销键轻轻跳动<br>
+            补不全那些溜走的光阴<br>
+            热搜在指尖流转<br>
+            每个词条，都是生活的切片
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 今日最热之国乒话题分析 -->
+  <div class="py-12 text-center bg-white">
+    <h2 class="text-3xl md:text-4xl font-bold text-neutral mb-4">今日最热之国乒话题分析</h2>
+    <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+  </div>
+
+  <!-- 词频词云分析 -->
+  <section id="word-cloud" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-neutral mb-10 text-center">
+        <i class="fa fa-cloud mr-2 text-primary"></i>词频词云分析
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <img src="A.jpg" alt="词频词云分析图A" class="w-full h-64 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-neutral mb-2">词频统计柱状图</h3>
+            <p class="text-gray-600">通过对B站国乒相关视频的弹幕评论词频统计分析，结合echart的生成基础版词频统计可视化图。</p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <img src="B.jpg" alt="词频词云分析图B" class="w-full h-64 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-neutral mb-2">词频多维度分析</h3>
+            <p class="text-gray-600">将词汇分成名词、动词等形式，来呈现弹幕评论中词汇的维度分析。</p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <img src="C.jpg" alt="词频词云分析图C" class="w-full h-64 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-neutral mb-2">环形分类气泡图</h3>
+            <p class="text-gray-600">将关键词的词性通过环形方式进行呈现，气泡展现频次情况。</p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <img src="D.jpg" alt="词频词云分析图D" class="w-full h-64 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-neutral mb-2">词频旭日图分析</h3>
+            <p class="text-gray-600">用echart的旭日图来呈现词频的分布情况。</p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <img src="E.jpg" alt="词频词云分析图E" class="w-full h-64 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-neutral mb-2">词云图</h3>
+            <p class="text-gray-600">将高频词语生成词云图，用奖杯形状来可视化呈现。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 情感分析 -->
+  <section id="sentiment" class="py-16 bg-neutral-light">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-neutral mb-10 text-center">
+        <i class="fa fa-bar-chart mr-2 text-primary"></i>情感分析
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <img src="F.jpg" alt="情感分析图F" class="w-full h-80 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-neutral mb-2">情感分布比例图</h3>
+            <p class="text-gray-600">基于自然语言处理技术，分析B站弹幕评论文本中的情感倾向，展示积极、中性和消极情感的分布比例。</p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <img src="G.jpg" alt="情感分析图G" class="w-full h-80 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-neutral mb-2">情感类别分布图</h3>
+            <p class="text-gray-600">用柱状图来呈现B站相关视频弹幕评论的情感态度分布。</p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <img src="H.jpg" alt="情感分析图H" class="w-full h-80 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-neutral mb-2">情感分数分布散点图</h3>
+            <p class="text-gray-600">展示B站相关视频弹幕评论的情感分数图，以散点图的形式呈现，展现情感得分和情感强度。</p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <img src="I.jpg" alt="情感分析图I" class="w-full h-80 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-neutral mb-2">情感趋势变化</h3>
+            <p class="text-gray-600">展现整体的情感趋势变化，统计并呈现得分均值和评论序列的变化。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 其他可视化分析 -->
+  <section id="visualization" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-neutral mb-10 text-center">
+        <i class="fa fa-pie-chart mr-2 text-primary"></i>其他可视化分析
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <img src="J.jpg" alt="其他可视化分析图J" class="w-full h-96 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-neutral mb-2">弹幕评论文本长度直方图</h3>
+            <p class="text-gray-600">以直方图的形式呈现弹幕评论的文本长度分布情况。</p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <img src="K.jpg" alt="其他可视化分析图K" class="w-full h-96 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-neutral mb-2">高频词雷达图</h3>
+            <p class="text-gray-600">呈现出现频次最高的5个词汇在不同行的平均出现情况。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- liblib生图 -->
+  <section id="liblib" class="py-16 bg-neutral-light">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-neutral mb-10 text-center">
+        <i class="fa fa-picture-o mr-2 text-primary"></i>liblib生图
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <img src="L.jpg" alt="古风生成图" class="w-full h-80 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-neutral mb-2">古风风格</h3>
+            <p class="text-gray-600">假设古代人也会打乒乓球，感受穿越古今的乒乓魅力。</p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <img src="M.jpg" alt="卡通风生成图" class="w-full h-80 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-neutral mb-2">卡通风格</h3>
+            <p class="text-gray-600">为乒乓设计可爱的卡通小人形象，吸引小朋友来了解乒乓。</p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover">
+          <img src="N.jpg" alt="怀旧风生成图" class="w-full h-80 object-cover">
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-neutral mb-2">怀旧风格</h3>
+            <p class="text-gray-600">运用怀旧风格创作的乒乓主题图片，回忆90年代的乒乓热潮。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI视频+配乐 -->
+  <section id="video" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-neutral mb-10 text-center">
+        <i class="fa fa-film mr-2 text-primary"></i>AI视频+配乐
+      </h2>
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden max-w-4xl mx-auto">
+        <video controls poster="https://picsum.photos/1200/675?random=1" class="w-full">
+          <source src="O_video.mp4" type="video/mp4">
+          您的浏览器不支持视频播放。
+        </video>
+        <div class="p-6">
+          <h3 class="text-xl font-semibold text-neutral mb-2">国乒AI视频</h3>
+          <p class="text-gray-600">使用AI制作的呈现国乒赛场奋斗精神和领奖荣誉瞬间的视频，采用AI生成视频和AI生成音乐。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="bg-neutral text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4">热搜分析之国乒</h3>
+          <p class="text-gray-300 mb-4">每日热点尽在掌握，深度剖析国乒话题热度与网民情感</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-300 hover:text-white transition-colors">
+              <i class="fa fa-weibo text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-300 hover:text-white transition-colors">
+              <i class="fa fa-wechat text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-300 hover:text-white transition-colors">
+              <i class="fa fa-twitter text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-300 hover:text-white transition-colors">
+              <i class="fa fa-instagram text-xl"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">快速链接</h3>
+          <ul class="space-y-2">
+            <li><a href="#hot-news" class="text-gray-300 hover:text-white transition-colors">热搜一览</a></li>
+            <li><a href="#poetry" class="text-gray-300 hover:text-white transition-colors">热搜作诗</a></li>
+            <li><a href="#word-cloud" class="text-gray-300 hover:text-white transition-colors">词频词云分析</a></li>
+            <li><a href="#sentiment" class="text-gray-300 hover:text-white transition-colors">情感分析</a></li>
+            <li><a href="#visualization" class="text-gray-300 hover:text-white transition-colors">其他可视化分析</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">更多资源</h3>
+          <ul class="space-y-2">
+            <li><a href="#liblib" class="text-gray-300 hover:text-white transition-colors">liblib生图</a></li>
+            <li><a href="#video" class="text-gray-300 hover:text-white transition-colors">AI视频+配乐</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">数据来源</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">分析方法</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-white transition-colors">关于我们</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">订阅更新</h3>
+          <p class="text-gray-300 mb-4">订阅我们的通讯，获取最新的国乒热搜分析</p>
+          <form class="flex">
+            <input type="email" placeholder="您的邮箱地址" class="px-4 py-2 rounded-l-lg w-full focus:outline-none text-neutral">
+            <button type="submit" class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-r-lg transition-colors">
+              <i class="fa fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-400">
+        <p>&copy; 2025 热搜分析之国乒. 保留所有权利.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 回到顶部按钮 -->
+  <button id="back-to-top" class="fixed bottom-6 right-6 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transform transition-transform duration-300 translate-y-20 opacity-0 hover:bg-primary/90">
+    <i class="fa fa-angle-up text-xl"></i>
+  </button>
+
+  <script>
+    // 移动端菜单切换
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      if (mobileMenu.classList.contains('hidden')) {
+        mobileMenuButton.innerHTML = '<i class="fa fa-bars"></i>';
+      } else {
+        mobileMenuButton.innerHTML = '<i class="fa fa-times"></i>';
+      }
+    });
+    
+    // 导航栏滚动效果
+    const navbar = document.getElementById('navbar');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('py-2', 'shadow-md');
+        navbar.classList.remove('py-3');
+      } else {
+        navbar.classList.add('py-3');
+        navbar.classList.remove('py-2', 'shadow-md');
+      }
+    });
+    
+    // 回到顶部按钮
+    const backToTopButton = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopButton.classList.remove('translate-y-20', 'opacity-0');
+        backToTopButton.classList.add('translate-y-0', 'opacity-100');
+      } else {
+        backToTopButton.classList.add('translate-y-20', 'opacity-0');
+        backToTopButton.classList.remove('translate-y-0', 'opacity-100');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        // 关闭移动菜单
+        if (!mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+          mobileMenuButton.innerHTML = '<i class="fa fa-bars"></i>';
+        }
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // 查看更多热搜
+    const loadMoreButton = document.getElementById('load-more');
+    const moreHotNews = document.getElementById('more-hot-news');
+    
+    loadMoreButton.addEventListener('click', () => {
+      moreHotNews.classList.toggle('hidden');
+      if (moreHotNews.classList.contains('hidden')) {
+        loadMoreButton.innerHTML = '查看更多 <i class="fa fa-angle-down ml-1"></i>';
+      } else {
+        loadMoreButton.innerHTML = '收起 <i class="fa fa-angle-up ml-1"></i>';
+      }
+    });
+  </script>
+</body>
+</html>
